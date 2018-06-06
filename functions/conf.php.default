@@ -1,0 +1,20 @@
+<?php
+
+include "conn_with_db.php";
+
+$database_host="";
+$database_username="";
+$database_password="";
+$db_name = "";
+
+$InstallationSite = "";
+$SiteNoteTeaser = "";
+
+$connection = conn_with_db($database_host, $database_username, $database_password, $db_name);
+
+const CLIENT_ID = '<GPLUSCLIENTID>';
+const CLIENT_SECRET = '<GPLUSClientSecret>';
+const APPLICATION_NAME = "FORGEBox web app";
+
+?>
+

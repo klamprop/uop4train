@@ -1,0 +1,152 @@
+/*
+Nav Bar Custom CSS
+Start
+*/
+
+
+
+/* @font-face {
+  font-family: "PT Serif Caption";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Cambria"), local("PT Serif Caption"), local("PTSerif-Caption"), url(https://themes.googleusercontent.com/static/fonts/ptserifcaption/v4/7xkFOeTxxO1GMC1suOUYWWhBabBbEjGd1iRmpyoZukE.woff) format('woff');
+}
+@font-face {
+  font-family: "Open Sans Light";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Segoe UI Light"), local("Open Sans Light"), local("OpenSans-Light"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTZ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Segoe UI"), local("Open Sans"), local("OpenSans"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/K88pR3goAWT7BTt32Z01mz8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: "Open Sans Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Segoe UI Bold"), local("Open Sans Bold"), local("OpenSans-Bold"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzJ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
+}*/
+
+body{font-family:"Open Sans", Helvetica,Arial,sans-serif;}
+
+
+p,ul,li{ 
+	font-size:16px;
+}
+
+h1 {
+        font-size:50px;
+	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+}
+h2 {
+	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+
+.navbar-forgebox {
+	background-color: #666666;
+	border-color: #000000;
+}
+.navbar-forgebox .navbar-brand {
+	color: #edf1fc;
+}
+.navbar-forgebox .navbar-brand:hover, .navbar-forgebox .navbar-brand:focus {
+	color: #f5ecff;
+}
+.navbar-forgebox .navbar-text {
+	color: #edf1fc;
+	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+}
+.navbar-forgebox .navbar-nav > li > a {
+	color: #edf1fc;
+	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+}
+.navbar-forgebox .navbar-nav > li > a:hover, .navbar-forgebox .navbar-nav > li > a:focus {
+	color: #f5ecff;
+}
+.navbar-forgebox .navbar-nav > .active > a, .navbar-forgebox .navbar-nav > .active > a:hover, .navbar-forgebox .navbar-nav > .active > a:focus {
+	color: #f5ecff;
+	background-color: #000000;
+}
+.navbar-forgebox .navbar-nav > .open > a, .navbar-forgebox .navbar-nav > .open > a:hover, .navbar-forgebox .navbar-nav > .open > a:focus {
+	color: #f5ecff;
+	background-color: #000000;
+}
+.navbar-forgebox .navbar-toggle {
+	border-color: #000000;
+}
+.navbar-forgebox .navbar-toggle:hover, .navbar-forgebox .navbar-toggle:focus {
+	background-color: #000000;
+}
+.navbar-forgebox .navbar-toggle .icon-bar {
+	background-color: #edf1fc;
+}
+.navbar-forgebox .navbar-collapse,
+.navbar-forgebox .navbar-form {
+	border-color: #edf1fc;
+}
+.navbar-forgebox .navbar-link {
+	color: #edf1fc;
+}
+.navbar-forgebox .navbar-link:hover {
+	color: #f5ecff;
+}
+
+.nav-forgebox > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #000000;
+}
+
+@media (max-width: 767px) {
+	.navbar-forgebox .navbar-nav .open .dropdown-menu > li > a {
+		color: #edf1fc;
+	}
+	.navbar-forgebox .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-forgebox .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: #f5ecff;
+	}
+	.navbar-forgebox .navbar-nav .open .dropdown-menu > .active > a, .navbar-forgebox .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-forgebox .navbar-nav .open .dropdown-menu > .active > a:focus {
+		color: #f5ecff;
+		background-color: #000000;
+	}
+}
+
+/*
+End Nav Bar Custom CSS
+*/
+
+/*
+Start Accordion Custom CSS
+*/
+
+.accordion-group {
+    margin-bottom: 5px;
+    border: 1px solid #E5E5E5;
+    border-radius: 4px;
+}
+
+.accordion-heading {
+    border-bottom: 0px none;
+}
+
+.accordion-heading .accordion-toggle {
+    display: block;
+    padding: 8px 15px;
+}
+.accordion-toggle {
+    cursor: pointer;
+}
+/*
+End Accordion Custom CSS
+*/
+
+.carousel-control{
+	top:135px;
+	bottom:280px;
+	width:4%;
+}
+.carousel-indicators {
+    bottom: 5px;
+}

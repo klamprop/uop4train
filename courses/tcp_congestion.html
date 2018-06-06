@@ -1,0 +1,316 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="PlanetLab course">
+    <meta name="author" content="FORGE">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <title>TCP Congestion Control: Task 1</title>
+    <!-- Bootstrap core CSS -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	
+	<script>
+	$(function() {
+		$( "#draggableServer" ).draggable({ zIndex: 100  });
+		$( "#draggableClient" ).draggable({ zIndex: 101  });
+		$( "#draggableGraph" ).draggable({ zIndex: 102  });
+		$( "#draggableLogger" ).draggable({ zIndex: 103  });
+		
+	  
+	});
+	  </script>
+
+  </head>
+
+
+<body >
+<div class="container" itemscope="" itemtype="http://schema.org/CreativeWork">
+
+
+<div class="row">
+
+        <h1>Title: <span itemprop="name">TCP Congestion Control</span></h1>
+        Author: <span itemprop="author">Christos Tranoris</span> <br>
+	Author: <span itemprop="author">Kostas Lampropoulos</span><br>
+	Publisher: <span itemprop="publisher">University of Patras</span><br>
+	Date created: <span itemprop="datecreated">14/7/2014</span><br>
+	Language: <span itemprop="inLanguage">English</span><br>
+	
+	About: <span itemprop="about">FIRE</span>, 
+<span itemprop="about">networks</span>, 
+<span itemprop="about">control</span>, 
+<span itemprop="about">congestion</span>, 
+<span itemprop="about">Virtual Wall</span>, 
+<span itemprop="about">TCP</span>
+<br>
+
+educationalAlignment: { <br>
+<span itemprop="educationalAlignment" itemscope itemtype="http://schema.org/AlignmentObject">
+	alignmentType:<span itemprop="alignmentType" >Teaches</span><br>
+	educationalFramework:<span itemprop="educationalFramework" >University of Patras, ECE</span><br>
+	targetName:<span itemprop="targetName"  >22A709</span><br>
+	targetDescription:<span itemprop="targetDescription"  >Network Architectures & Protocols I</span><br>
+	targetUrl:<span itemprop="targetUrl" >
+	<a href="http://www.ece.upatras.gr/en/education/undergraduate/under-courses.html?id=175" >
+		http://www.ece.upatras.gr/en/education/undergraduate/under-courses.html?id=175
+	</a>
+	
+	</span><br>
+</span>
+}
+<br>
+
+educationalUse: <span itemprop="educationalUse">tutorial/assignement</span> <br>
+timeRequired/Duration: <span itemprop="timeRequired" content="PT1H30M">PT1H30M (1 Hour 30 Minutes)</span> <br>
+typicalAgeRange: <span itemprop="typicalAgeRange" >18-</span> <br>
+interactivityType: <span itemprop="interactivityType" >mixed</span> <br>
+learningResourceType: <span itemprop="learningResourceType" >Presentation/Tutorial</span> <br>
+license:<span itemprop="license" itemscope itemtype="http://schema.org/URL">
+  <a href="http://creativecommons.org/licenses/by/3.0/" itemprop="url">
+	http://creativecommons.org/licenses/by/3.0/
+	</a>
+</span><br>
+isBasedOnUrl: <span itemprop="isBasedOnUrl" >http://Example-Another-FORGEBox-Course</span> <br>
+
+
+EducationalAudience:{<br>
+<span itemprop="audience" itemscope itemtyp="http://schema.org/EducationalAudience">
+educationalRole: <span itemprop="educationalRole">Master level</span> <br>
+audienceType: <span itemprop="audienceType">University Student</span> <br>
+</span>
+}<br>
+
+</div>
+        <hr />
+	
+
+<div class="row" itemprop="citation" >
+
+        <h1>Title: <span itemprop="name">Task 1: Hands on access to Virtual Wall</span></h1>
+	Author: <span itemprop="author">Kostas Lampropoulos</span><br>
+	Publisher: <span itemprop="publisher">University of Patras</span><br>
+	Date created: <span itemprop="datecreated">10/7/2014</span><br>
+	Language: <span itemprop="inLanguage">English</span><br>
+	
+
+</div>
+	<hr />
+<div class="row">
+	<h2>Introduction</h2>
+</div>
+
+<div class="row">
+
+	<div class="col-md-12" itemprop="description">
+	The second part of the TCP congestion control exercise provides a complete set of tools and infrastructure for conducting a series of experiments relative to TCP and UDP. 
+	In this part you will have the ability to run and, on-the-fly, manage various tests in a real remote testbed with reserved hosts and network resources. 
+	On this environment you will be asked to perform 6 tests that examine various aspects of the TCP congestion control. 
+	For each test you will have to complete a specific number of steps, collect the required information and create the appropriate report (e.g. a graphical representation of the results).  
+	</div>
+
+	
+</div>
+
+<hr />
+
+<div class="row">
+	<h2>Theoretical<h2>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+	Please see part 1 of TCP Congestion Control course series<br>
+	This page connects you to the iMinds Virtual wall. Check the side image on how you are connected to the Virtual Wall.<br>
+	We are connected over IPv6 to the iMinds Virtual wall. You are <b>not</b> required to do so when accessing this page.<br>
+	The Virtual Wall is hosted at and operated by iMinds iLab.t. 
+	The hardware which is visible through the Aggregate Manager consists of 110x dual CPU nodes (2x 6 cores), 24 GB RAM, 1x harddisk 250GB, Intel Xeon E5645 (2.40GHz), 
+	interconnected with a Force 10 C300 switch (multiple gigabit interfaces per node).
+	
+	</div>
+	<div class="col-md-6"><img itemprop="image" src="tcp_img1.png">
+	</div>
+</div>
+<hr />
+
+<div class="row">
+	<h2>Learning outcomes<h2>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+	This part uses a simple TCP congestion control exercise to train you on how you can run tasks on testbeds with real hardware resources. 
+	</div>
+</div>
+
+<hr />
+
+<div class="row">
+	<h2>Learning activities<h2>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+	During this simple task a TCP client (node0) connects to a TCP server (node1) and transmits data for 30 seconds. 
+	During this connection, in the client node, various TCP parameters are recorded in a file called “tcpout“
+	<br><img src="tcp_congestion.jpg">
+	</div>
+</div>
+
+<div class="row">
+
+
+	<h3>Connect to the server machine</h3>
+	<div class="col-md-6">
+	Just follow these steps to connect and manage node1:
+                                <ol>
+                                        <li>
+                                                Connect to server(node1) using the window on the side, with credentials:
+<pre>username: wall02guest
+password: wall
+</pre>
+										</li>
+                                        <li>
+                                                As soon as you are successfully connected, run the following scripts (located in the login directory). 
+<pre>
+cd /local/forge
+./install
+./run_server
+</pre>
+										</li>
+										<li>
+										Go to the next section and start the client machine.
+										</li>
+										<li>
+										After the completion of the task and collection of your output, stop the server. <pre>Ctrl^C</pre>
+										</li>
+                                        <li>Exit the experiment machine. Type: <pre>exit</pre></li>
+                                </ol>
+
+	</div>
+
+	<div id="snaptargetServer" style="height: 380px;" class="col-md-6">
+        
+
+		<div id="draggableServer" class="draggable" style="width:502px; height:381px;background-color: black;color: white;padding-left: 1; z-index: 100">
+			<p>Server </p>
+			<p><iframe frameborder="0" width="500" height="350" scrolling="no" src="http://www.forgebox.eu:443/ssh2web" ></iframe></p>
+		</div>
+
+	</div>
+</div>
+
+
+<div class="row">
+	<h3>Connect to client machine</h3>
+        <div class="col-md-6">
+        Just follow these steps to connect to the client machine:
+                                <ol>
+                                        <li>
+                                                Connect to client(node0) using the window on the side, with credentials:
+<pre>username: wall01guest
+password: wall
+</pre>
+												</li>
+                                        <li>
+                                                As soon as you are successfully connected, run the following scripts (located in the login directory). 
+<pre>
+cd /local/forge
+./install
+./monitor
+./run_client
+</pre>
+												</li>
+										<li>After the completion of the demo a new file will exist in the same directory called “tcpout”. 
+										This file contains various TCP congestion control parameters that were recorded during this demo connection</li>
+										<li>
+										Wait for the client to finish after 30 seconds.
+										</li>
+										<li>Open the file and examine the TCP parameters<pre>nano tcpout</pre></li>
+                                        <li>Exit the experiment machine. Type: <pre>exit</pre> <ENTER></li>
+                                </ol>
+
+        </div>
+
+	<div id="snaptargetClient" style="height: 350px;" class="col-md-6">
+
+
+                <div id="draggableClient" class="draggable" style="width:502px; height:381px;background-color: black;color: white;padding-left: 1; z-index: 101">
+                        <p>Client </p>
+                        <p><iframe frameborder="0" width="500" height="350" scrolling="no" src="http://www.forgebox.eu:443/ssh2web/login.action?usertoconnect=klamprop" ></iframe></p>
+                </div>
+
+        </div>
+
+
+</div>
+
+
+<div id="snaptargetGraph"  class="row">
+	<h2>Graph</h2>
+	To get the graph after running the small test, please login with the following:
+	<pre>
+	username: wall01guest
+	password: wall
+	Machine= client1.UoPDemo.wall2-ilabt-iminds-be.wall1.ilabt.iminds.be
+	</pre>
+	When you are logged in, press the "Get graph" button
+	
+	<div id="draggableGraph" class="draggable" style="width:100%; height:531px;background-color:  black;color: white;padding-left: 1;padding-right: 1; z-index: 102">
+	        <p>Graph output</p>
+		<p><iframe frameborder="0" width="100%" height="500" scrolling="no" src="http://www.forgebox.eu:443/ssh2web/loginToGraph.action?usertoconnect=klamprop" ></iframe></p>
+	</div>
+
+</div>
+
+
+
+<div id="snaptargetLogger"  class="row">
+	<h2>Remote logging</h2>
+	To get the logging after running the small test, please login with the following:
+	<pre>
+	username: wall01guest
+	password: wall
+	logfiles: /local/forge/tcpout
+	Machine= client1.UoPDemo.wall2-ilabt-iminds-be.wall1.ilabt.iminds.be
+	</pre>
+	<div id="draggableLogger" class="draggable" style="width:100%; height:531px;background-color:  black;color: white;padding-left: 1;padding-right: 1; z-index: 102">
+	        <p>Logger output</p>
+		<p><iframe frameborder="0" width="100%" height="500" scrolling="yes" src="http://www.forgebox.eu:443/ssh2web/loginToLogger.action?usertoconnect=klamprop" ></iframe></p>
+	</div>
+
+</div>
+
+
+
+
+<hr />
+<div class="row">
+	<h2>Summary<h2>
+</div>
+
+<hr />
+<div class="row">
+	<h2>Further reading<h2>
+</div>
+
+<hr />
+<div class="row">
+	<h2>Glossary<h2>
+</div>
+
+
+<div id="footer" style="clear:both;">
+<hr />
+<p>&nbsp;</p>
+</div>
+
+</div>
+</body>
+</html>
+
