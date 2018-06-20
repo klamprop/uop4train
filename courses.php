@@ -39,6 +39,7 @@
 		}
 		else
 		{
+		
 			$query_insert_course = "INSERT INTO tbl_courses(title, sdescription, content, course_item_id, author, create_date, modify_date, publisher,".
 									"language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, ".
 									"duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType,".
@@ -64,12 +65,18 @@
 			$result_insert_category = $connection->query($query_insert_category) or die("Error in query.." . mysqli_error($connection));
 		}
 
+		for($i=0;$i<count($_POST["project"]);$i++)
+		{
+			$query_insert_category = "INSERT INTO tbl_project_course(course_id, project_id) VALUES (".$Insid.",".$_POST["project"][$i].")";
+			$result_insert_category = $connection->query($query_insert_category) or die("Error in query.." . mysqli_error($connection));
+		}
+		
 		
 		if($_GET["citem"] == 1)
 		{
 			?>
 			<script>
-				window.location.href = 'mycourse.php';
+				//window.location.href = 'mycourse.php';
 			</script>
 			<?php
 		}
@@ -398,6 +405,39 @@
 												if(isset($_GET['id']))
 												{
 													$query_select_categories = "SELECT id FROM 	tbl_match_course_category WHERE course_id=".$_GET['id']." AND course_category_id=".$row[0];
+													$result_select_categories = $connection->query($query_select_categories) or die("Error in query.." . mysqli_error($connection));												
+													$num_rows = $result_select_categories->num_rows;
+												}
+												if ($num_rows>0) 
+												{						
+													echo "<option selected value=\"".$row[0]."\">".$row[1]."</option>";
+												}
+												else
+												{
+													echo "<option value=\"".$row[0]."\" >".$row[1]."</option>";
+												}
+													
+												$i_category++;
+											}
+										?>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-8">
+										<label for="InputCategory">Projects : (ctrl+click to multi select categories)</label>
+										<select multiple name="project[]" id="project" class="form-control">
+										<?php
+										
+											$query_select_category = "SELECT id, name FROM tbl_project WHERE active=1 ";//AND course_item_id=".$_GET["citem"];				
+											$result_select_category = $connection->query($query_select_category) or die("Error in query.." . mysqli_error($connection));
+											$i_category=0;
+												
+											while($row = $result_select_category->fetch_row()){			
+												$num_rows =0;
+												if(isset($_GET['id']))
+												{
+													$query_select_categories = "SELECT id FROM 	tbl_project_course WHERE course_id=".$_GET['id']." AND project_id=".$row[0];
 													$result_select_categories = $connection->query($query_select_categories) or die("Error in query.." . mysqli_error($connection));												
 													$num_rows = $result_select_categories->num_rows;
 												}

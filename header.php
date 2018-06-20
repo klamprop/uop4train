@@ -278,6 +278,14 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									?>
 								</ul>
 							</li>
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="newproject.php">Create Project</a></li>
+								</ul>
+							</li>
+
 							<?php
 
 							}
