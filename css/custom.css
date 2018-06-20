@@ -33,22 +33,23 @@ Start
 body{font-family:"Open Sans", Helvetica,Arial,sans-serif;}
 
 
-p,ul,li{ 
+p,ul,li{
 	font-size:16px;
 }
 
 h1 {
-        font-size:50px;
-	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+        font-size:30px;
 }
 h2 {
-	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+				font-size:20px;
 }
 
 
 .navbar-forgebox {
-	background-color: #666666;
-	border-color: #000000;
+	background-color: #ffffff;
+	border-color: #efefef;
+	color:#ffffff;
+	margin-bottom: 0px;
 }
 .navbar-forgebox .navbar-brand {
 	color: #edf1fc;
@@ -61,11 +62,14 @@ h2 {
 	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
 }
 .navbar-forgebox .navbar-nav > li > a {
-	color: #edf1fc;
-	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+	color: #000000;
+	}
+.navbar-forgebox .navbar-nav > li > a:hover {
+	color: #666666;
+	background: #efefef;
 }
-.navbar-forgebox .navbar-nav > li > a:hover, .navbar-forgebox .navbar-nav > li > a:focus {
-	color: #f5ecff;
+	} .navbar-forgebox .navbar-nav > li > a:focus {
+	color: #666666;
 }
 .navbar-forgebox .navbar-nav > .active > a, .navbar-forgebox .navbar-nav > .active > a:hover, .navbar-forgebox .navbar-nav > .active > a:focus {
 	color: #f5ecff;
@@ -95,11 +99,69 @@ h2 {
 	color: #f5ecff;
 }
 
+.nav .singnincolors > ul > li > a {
+ 	color: #000000;
+}
 .nav-forgebox > li > a:hover, .nav > li > a:focus {
     text-decoration: none;
-    background-color: #000000;
+    background-color: #ffffff;
+		color:#555555;
 }
 
+.singnincolors {
+	font-weight:bold;
+	color:#000000;
+}
+
+.singnincolors:hover {
+	color:#555555;
+}
+
+.mainbutton {
+	color:#000000;
+	font-weight: bold;
+	font-size: 17px;
+	background-color: #ffffff;
+	border: 1px solid #e1e1e1;
+	box-shadow: 1px 1px  #e1e1e1;
+	border-radius: 5px;
+	width:85%;
+	height:80px;
+}
+
+.mainbutton:hover {
+	background-color: #f8f8f8;
+}
+
+.mainbutton:active:focus{
+	outline: 1px solid #e7e7e7;
+}
+
+.mainbutton:focus{
+	outline: 1px solid #e7e7e7;
+}
+
+.coursesections > li > a {
+	background-color: #f8f8f8;
+	color:#000000;
+	border-radius: 5px 0px 0px 5px;
+}
+
+.coursesections > li.active > a, .coursesections > li.active >a:focus, .coursesections > li.active >a:hover  {
+	background-color: #ffffff;
+	color:#ff4400;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	border-left: 1px solid #000000;
+	margin-right:-1px;
+}
+
+.coursecontent {
+	border-top: 1px solid #000000;
+	padding-left: 0px;
+	}
+
+/*
 @media (max-width: 767px) {
 	.navbar-forgebox .navbar-nav .open .dropdown-menu > li > a {
 		color: #edf1fc;
@@ -112,7 +174,7 @@ h2 {
 		background-color: #000000;
 	}
 }
-
+*/
 /*
 End Nav Bar Custom CSS
 */

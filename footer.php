@@ -1,20 +1,16 @@
 
     <!--  ------------------------   /#footer      ------------------------      -->
-	
-	
-	
+
+
+
 	</div>	<!-- this is the container div from header-->
 		<footer id="footer">
-			<?php
-				if(!isset($_SESSION["UROLE_ID"]) || $_SESSION["UROLE_ID"]==7) {
-					include "login_footer.php";
-				}
-			?>	
+
 			<div class="md-modal md-effect-4 col-md-12 col-sm-12" id="modal-4">
 				<div class="row" style="margin-left: 0px !important;">
-					<button class="md-close btn btn-warning" style="">X Close</button> 
+					<button class="md-close btn btn-warning" style=""><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
 				</div>
-				<div class="md-content row" style="padding-bottom: 10px;">			
+				<div class="md-content row" style="padding-bottom: 10px;">
 						<!-- <a href="#" id="close_btn"><div class="md-close message-send"></div></a>-->
 					<button class="md-close close_btn btn btn-warning"><div class="md-close message-send"></div></button>
 					<div id="modal4_div" style="margin-top:-15px; height:auto;">
@@ -34,10 +30,10 @@
 										<textarea name="message" id="message" class="input-xlarge col-sm-10 col-xs-10 col-md-10"></textarea>
 										<br /><br />
 									</div>
-									
+
 								</div>
 								<br />
-							</form>	
+							</form>
 							<div class="col-md-12 col-sm-12"><br />
 								<input type="submit" style="float:right;background-color:#FFFFFF;" value="Send!" id="submit">
 							</div>
@@ -66,15 +62,15 @@
 					transform: rotate(90deg);
 					height: 100px;
 					padding-top:65px;
-					
+
 				}
-				
-				
-	
+
+
+
 			</style>
 			<script>
 				$(document).ready(function () {
-					
+
 					$("input#submit").click(function(){
 						if($('#message').val()=="" || $('#contact_name').val()=="" || $('#contact_email').val()=="")
 						{
@@ -89,7 +85,7 @@
 								data: $('form.contact').serialize(),
 								success: function(msg){
 									$(".message-send").html(msg);
-									$("#modal4_div").hide(); //hide popup 
+									$("#modal4_div").hide(); //hide popup
 									$(".close_btn").show();
 								},
 								error: function(){
@@ -98,54 +94,48 @@
 							});
 						}
 					});
-				
+
 					$("a#md-trigger1").click(function(){
 						$("#modal-4").show();
-						$("#modal4_div").show(); //hide popup 
+						$("#modal4_div").show(); //hide popup
 						$(".close_btn").hide();
-							
+
 					});
 				});
-			
-				$(".close_btn").click(function(){ 			
+
+				$(".close_btn").click(function(){
 					$("#modal-4").hide();
 				});
 
 			</script>
-			
-			<section>
+
+			<section style="background-color:#f8f8f8; border-top:1px solid #e7e7e7;">
 				<div class="container">
-					<div class="row"> 
+					<div class="row">
 							<div class="col-sm-12">
 							&nbsp;
 							</div>
 					</div>
-					<div class="row"> 
-							<div class="col-sm-12">
-								<a href="http://www.ict-forge.eu/" target="_blank"><img src="images/FORGE_Logo_small.png"/></a>
-								<img src="images/eu-commission.png"/>
-								<a href="http://www.ict-fire.eu/" target="_blank"><img src="images/FIRE-logo.png"/></a>
+					<div class="row">
+							<div class="col-sm-12">Powered by FORGEBox <?php include('version.txt');?> | <a href="terms.php" >Terms and Conditions</a> |
+							&copy; 2018 <a target="_blank" href="http://nam.ece.upatras.gr/" title="nam.ece.upatras.gr">NAM group - University of Patras</a> | <a href="all_course.php" target="_blank">&nbsp;See all Courses</i></a>
 							</div>
-							<div class="col-sm-12">Running FORGEBox <?php include('version.txt');?> | <a href="terms.php" >Terms and Conditions</a> | 
-							&copy; 2015 <a target="_blank" href="http://www.forgebox.eu/" title="www.forgebox.eu">forgebox.eu</a> on behalf of the <a target="_blank" href="http://www.ict-forge.eu/" title="http://www.ict-forge.eu/">FORGE</a> consortium | <a href="course_rss_feed.php" target="_blank"><i class="fa fa-rss">&nbsp;RSS Feed</i></a> | <a href="all_forge_courses.php" target="_blank">&nbsp;See all Courses</i></a>
-							</div>  
-							
+
 					</div>
-					<div class="row"> 
+					<div class="row">
 							<div class="col-sm-12">
 							&nbsp;
 							</div>
 					</div>
 				</div>
-				
+
 			</section>
-			
+
 		</footer>
-		
+
 		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
-		
-	
-		<br /><br />
+
+
 		<div class="md-overlay"></div><!-- the overlay element -->
 
 		<!-- classie.js by @desandro: https://github.com/desandro/classie -->
@@ -166,11 +156,11 @@
 		if (file_exists($filename)) {
 			include "google_analytics.php";
 		}
-			
+
 		?>
 			<?php
-		require_once('lrs_lib.php'); 
+		require_once('lrs_lib.php');
 	?>
-		
+
 </body>
 </html>

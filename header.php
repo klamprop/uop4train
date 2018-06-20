@@ -13,14 +13,14 @@ include "functions/access_role.php";
 $url_lrs_endpoint='';
 
 if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
-			
+
 	/*
 	$_SESSION['lrs_name']="";
 	$_SESSION['lrs_endpoint_url']="";
 	$_SESSION['lrs_username']="";
 	$_SESSION['lrs_password']="";
-			
-	$Select_lrs="SELECT lrs_name, endpoint_url, username, password FROM lrs_details WHERE id=12";	
+
+	$Select_lrs="SELECT lrs_name, endpoint_url, username, password FROM lrs_details WHERE id=12";
 	$result_lrs = $connection->query($Select_lrs);
 
 	while($row_lrs = $result_lrs->fetch_array()){
@@ -31,11 +31,11 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 		$_SESSION['lrs_login_record']=1;
 	}
 	*/
-	
+
 
 	//$url_lrs_endpoint = '?endpoint='.rawurlencode($lrs_endpoint).'&auth=Basic%20'.urlencode(base64_encode($lrs_authUser.":".$lrs_authPassword));
 }
-		
+
 ?>
 <html>
 <head>
@@ -50,66 +50,66 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 
 
 	<!-- New Header Bootstrap Start -->
-	<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> 
+	<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
 	 <link href="css/font-awesome.css" rel="stylesheet">
 	<!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/custom.css" rel="stylesheet">	
+	<link href="css/custom.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
 	<!-- End Bootstrap -->
-	
+
     <!-- metro css and js removed -->
 	<!--
-	<link href="css/metro-bootstrap.css" rel="stylesheet"> 
-    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet"> 
-    <link href="css/docs.css" rel="stylesheet"> 
+	<link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
 	<link href="css/nameceupatras.css" rel="stylesheet">
-    <link href="js/prettify/prettify.css" rel="stylesheet"> 
-    <link href="css/jquery-ui.css" rel="stylesheet"> 
+    <link href="js/prettify/prettify.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
 	-->
 	<!--
 	<script src="js/run_prettify.js"></script>
 -->
     <!-- Load JavaScript Libraries -->
 
-   <!-- <script src="js/jquery/jquery.min.js"></script>   
-    <script src="js/jquery/jquery-ui.min.js"></script> 	  --> 
+   <!-- <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/jquery/jquery-ui.min.js"></script> 	  -->
  <!--  	<script src="js/jquery/jquery.widget.min.js"></script>
     <script src="js/jquery/jquery.mousewheel.js"></script>
     <script src="js/prettify/prettify.js"></script>
 	-->
-	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>  
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/list.js"></script>
-	<script src="js/list.pagination.js"></script>	
+	<script src="js/list.pagination.js"></script>
 	<script src="js/carousel.js"></script>
-	<script src="js/collapse.js"></script>	
-	<script src="js/popover.js"></script>	
-	<script src="js/tab.js"></script>	
+	<script src="js/collapse.js"></script>
+	<script src="js/popover.js"></script>
+	<script src="js/tab.js"></script>
 	<script src="js/modernizr.custom.js"></script>
 	<script type="text/javascript" src="js/jquery.form.min.js"></script>
-	
-	
+
+
 	<script src="js/base64.js"></script>
-	
+
 	<script src="js/tincanapi/TinCanJS/build/tincan-min.js"></script>
 	<script src="js/tincanapi/common.js" ></script>
     <script src="js/tincanapi/contentfunctions.js" ></script>
 	<!-- <script src="js/tincanapi/BrowserPrep.js"></script> -->
-	
+
     <!-- Metro UI CSS JavaScript plugins -->
-    <!-- 
+    <!--
 	<script src="js/load-metro.js"></script>
 -->
-	
-	
+
+
     <!-- Local JavaScript -->
     <!--
 	<script src="js/docs.js"></script>
     <script src="js/github.info.js"></script>
-	
+
 	<script src="js/jquery.mixitup.min.js"></script>
 -->
 	<!-- include libries(jQuery, bootstrap, fontawesome) -->
@@ -117,39 +117,39 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 	<link href="summernote/font-awesome.min.css" rel="stylesheet">
 	<!-- <link href="summernote/bootstrap.no-icons.min.css" rel="stylesheet"> -->
 	<!-- <script src="summernote/bootstrap.min.js"></script>   -->
-	 
+
 	<!-- include summernote css/js -->
 	<link href="summernote/summernote.css" / rel="stylesheet">
 	<script src="summernote/summernote.min.js"></script>
-	
+
 	<!-- <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/jquery.steps.css">
     <script src="js/modernizr-2.6.2.min.js"></script> -->
     <!-- <script src="../lib/jquery-1.9.1.min.js"></script> -->
     <!-- <script src="js/jquery.cookie-1.3.1.js"></script>
     <script src="js/jquery.steps.js"></script> -->
-	
-	
-	
+
+
+
 	<link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/rating.min.css">
-	
-	
-	 
-	 
+
+
+
+
 	<style type="text/css">
 		.black, .black a {
 		  color: #000;
 		}
 	</style>
-	
-	
+
+
 	<?php
 	if(isset($_GET['lang']))
 	{
-		switch ($_GET['lang']) 
-		{		
+		switch ($_GET['lang'])
+		{
 			case 'en':
 				$lang_file = 'en.php';
 				break;
@@ -163,14 +163,14 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 	}
 
 	?>
-    <title>FORGEBox</title>
-		
+    <title>SecurityAware.me</title>
+
 </head>
 <body>
 
-	
-	<?php			
-		
+
+	<?php
+
 		//is_logged_in();
 		if(strpos(basename($_SERVER['REQUEST_URI']),'?'))
 		{
@@ -190,22 +190,22 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 		}
 
 	?>
-	<!-- start Header -->       
-	<section id="FORGEBoxHeaderMenuLogo" style="background-color:#333333" >
-		<div class="container" > 
+	<!-- start Header -->
+	<section id="FORGEBoxHeaderMenuLogo" style="background-color:#ffffff" >
+		<div class="container" >
 
 		<nav class="row navigation-bar dark" style="height:60px">
 			<nav class="navbar-content">
-				<a href="index.php" class="element" style="text-decoration:none; color:#FFFFFF;"><img src="images/FORGE_Logo_toolbar.png" style="margin-top: 5px;"/><br>at <?php echo $InstallationSite;?></a>
+				<a href="index.php" class="element" style="font-weight:bold; text-decoration: none; margin-left: 40%; color:#000000;"><img src="images/logoTBD.png" style="height:50px; margin-top: 5px;"/>Security Aware [dot_me]</a>
 			</nav>
 		</nav>
 		</div>
 	</section>
-	<section id="FORGEBoxHeaderMenu" style="background-color:#666666" > 
+	<section id="FORGEBoxHeaderMenu" >
 		<!-- <div class="container" >-->
 
 
-			<div class="navbar navbar-forgebox navbar-static-top" role="navigation" style="background-color:#666666; border-color: #666666;">
+			<div class="navbar navbar-forgebox navbar-static-top" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -213,7 +213,7 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 						  <span class="icon-bar"></span>
 						  <span class="icon-bar"></span>
 						  <span class="icon-bar"></span>
-						</button>	
+						</button>
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav nav-forgebox">
@@ -228,8 +228,7 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									if(accessRole("VIEW_ALL_COURSES",$connection))
 									{
 								?>
-									<li class="divider"></li>
-									<li><a href="all_course.php">All Course Modules</a></li>
+									<li><a href="all_course.php">View available Courses</a></li>
 								<?php
 									}
 									if(accessRole("VIEW_MY_COURSES",$connection))
@@ -238,7 +237,7 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									<li class="divider"></li>
 									<li><a href="mycourse.php">My Course Modules</a></li>
 									<?php
-									
+
 									}
 									if(accessRole("VIEW_PRESENTATION",$connection))
 									{
@@ -268,7 +267,7 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									<li><a href="course_support_services.php">Course Support Services</a></li>
 									<?php
 									}
-									
+
 									if(accessRole("INSTALL_COURSE_FROM_FORGESTORE",$connection))
 									{
 									?>
@@ -277,15 +276,14 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									<?php
 									}
 									?>
-									<li class="divider"></li>
 								</ul>
 							</li>
 							<?php
-							
+
 							}
 							if(accessRole("INSTALLED_MY_WIDGET",$connection) || accessRole("INSTALL_WIDGETS",$connection) || accessRole("VIEW_MY_WIDGET",$connection))
 							{
-				
+
 							?>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Widgets <span class="caret"></span></a>
@@ -294,7 +292,6 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 										if(accessRole("INSTALLED_MY_WIDGET",$connection))
 										{
 									?>
-											<li class="divider"></li>
 											<li><a href="widgets.php">My Installed Widgets</a></li>
 									<?php
 										}
@@ -320,11 +317,10 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									<?php
 										}
 									?>
-									<li class="divider"></li>
 								</ul>
 							</li>
 							<?php
-							
+
 							}
 							if(accessRole("INSTALLED_MY_SERVICES",$connection) || accessRole("INSTALL_SERVICES",$connection) || accessRole("VIEW_MY_SERVICES",$connection))
 							{
@@ -336,22 +332,19 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									if(accessRole("INSTALLED_MY_SERVICES",$connection))
 									{
 									?>
-										<li class="divider"></li>
 										<li><a href="services.php">My Installed Services</a></li>
-									
+
 									<?php
 									}
 									if(accessRole("INSTALL_SERVICES",$connection))
 									{
 									?>
-										<li class="divider"></li>
 										<li><a href="marketplace_services.php">Installed services</a></li>
 									<?php
 									}
 									if(accessRole("VIEW_MY_SERVICES",$connection))
 									{
 									?>
-										<li class="divider"></li>
 										<li><a href="manage_services.php">Manage Services</a></li>
 									<?php
 									}
@@ -370,7 +363,6 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 									if(accessRole("USER_MANAGEMENT",$connection))
 									{
 								?>
-										<li class="divider"></li>
 										<li><a href="users.php">Users Management</a></li>
 								<?php
 									}
@@ -419,58 +411,56 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 								<?php
 									$query_select_av = "SELECT avatar_name FROM tbl_users WHERE active_user=1 AND id_user=".$_SESSION["USERID"];
 									$result_select_av = $connection->query($query_select_av);
-							
+
 									while($row = $result_select_av->fetch_array())
 									{
 										$avatar1 = $row[0];
-									}						
-								?>											
-								
+									}
+								?>
+
 									<div style="float:left; margin-top:-10px;">
 										<img id="avatarProf" src="<?php if(!empty($avatar1)){ if (  strpos($avatar1, 'http') === 0  ){ echo $avatar1; }else 	echo 'images/avatars/'.$_SESSION['USERID'].'/thubs/'.$avatar1; }else { echo 'images/defavatar.png'; } ?>" style="height:42px;" />
 									</div>
 									<div style="float:left; margin-top:-10px;padding-left:5px;">
-										<?php echo $_SESSION['FNAME']." ".$_SESSION['LNAME'];?> <br /> <?php echo "(".$_SESSION['UROLE'].")";?>  
+										<?php echo $_SESSION['FNAME']." ".$_SESSION['LNAME'];?> <br /> <?php echo "(".$_SESSION['UROLE'].")";?>
 									</div>
 									<div style="float:left;">&nbsp;
 										<span class="caret"></span>
 									</div>
-								
+
 								</a>
 								<ul class="dropdown-menu" role="menu">
 								<?php
 									if(accessRole("MY_ACCOUNT",$connection))
 									{
 								?>
-									<li class="divider"></li>
-									<li><a href="account.php">My Account</a></li>	
+									<li><a href="account.php">My Account</a></li>
 								<?php
 									}
 									if(accessRole("REVIEWS",$connection))
 									{
-								?>	
+								?>
 										<li class="divider"></li>
 										<li><a href="reviews.php">My Reviews</a></li>
 								<?php
 									}
 									if(accessRole("MY_DASHBOARD",$connection))
 									{
-								?>	
+								?>
 										<li class="divider"></li>
 										<li><a href="dashboard.php">My Dashboard</a></li>
 								<?php
 									}
 									if(accessRole("NOTIFICATIONS",$connection))
 									{
-								?>	
+								?>
 										<li class="divider"></li>
 										<li><a href="notification.php">Notifications</a></li>
 								<?php
 									}
-								?>	
+								?>
 									<li class="divider"></li>
-									<li><a href="functions/logout.php">Logout</a></li>
-									<li class="divider"></li>
+									<li><a href="functions/logout.php" style="color:#ff4500;">Logout</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -480,7 +470,6 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 					</div><!--/.nav-collapse -->
 				</div><!--/.container-fluid -->
 			</div>
-	</section> 
-	<!--  End Header -->	
-   <div class="container" >  <!-- This div should close on footer.php -->   
-	
+	</section>
+	<!--  End Header -->
+   <div class="container" >  <!-- This div should close on footer.php -->
