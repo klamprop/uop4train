@@ -46,9 +46,9 @@
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="padding-top:20px;padding-bottom:50px">
 			     <h2 style="color:#636365" ><b>List of courses</b></h2>
            <?php
-	          if(isset($_GET['project']))
+	          if(isset($_GET['project_id']))
             {
-              printSMESECCourses($connection);
+              printSMESECCourses($connection,$_GET['project_id']);
             }else
            printTeaserPublicCourses($connection);
 
@@ -104,8 +104,15 @@ function printTeaserSignUpCourses($connection){
  }
 
 
- function printSMESECCourses($connection){
-  $query_select_courses= "SELECT * FROM tbl_project_course WHERE project_id=2  AND course_item_id=1 AND active=1 order by modify_date DESC LIMIT 12";
+ function printSMESECCourses($connection, $projectID){
+  $query_select_courses = "SELECT tbl_courses.id, tbl_courses.title, tbl_courses.sdescription, tbl_courses.content, tbl_courses.course_item_id, tbl_courses.author, ";
+  $query_select_courses .= " tbl_courses.create_date, tbl_courses.modify_date, tbl_courses.publisher, tbl_courses.`language`, tbl_courses.about, tbl_courses.alignmentType, ";
+  $query_select_courses .= " tbl_courses.educationalFramework, tbl_courses.targetName, tbl_courses.targetDescription, tbl_courses.targetURL, tbl_courses.educationalUse, ";
+  $query_select_courses .= " tbl_courses.duration, tbl_courses.typicalAgeRange, tbl_courses.interactivityType, tbl_courses.learningResourseType, tbl_courses.licence, tbl_courses.isBasedOnURL, ";
+  $query_select_courses .= " tbl_courses.educationalRole, tbl_courses.audienceType, tbl_courses.active, tbl_courses.publish_to_anonymous, tbl_courses.category_id, tbl_courses.create_uid, ";
+  $query_select_courses .= " tbl_courses.interactive_category, tbl_courses.interactive_item, tbl_courses.interactive_url, tbl_courses.iframe_height, tbl_project.`name` FROM ";
+  $query_select_courses .= " tbl_project INNER JOIN tbl_project_course ON tbl_project_course.project_id = tbl_project.id INNER JOIN tbl_courses ON tbl_project_course.course_id = tbl_courses.id WHERE ";
+  $query_select_courses .= " tbl_project_course.project_id = ".$projectID." AND tbl_courses.course_item_id = 1 ORDER BY tbl_courses.create_date DESC";
   $result_select_courses = $connection->query($query_select_courses);
 
 

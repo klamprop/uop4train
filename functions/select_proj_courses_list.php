@@ -18,7 +18,7 @@
 			} else if($row[2]==1){
 			$active_prj = "fa fa-check-square-o";
 			}
-			$data_table_project.="<tr><td class=\"name\" style=\"border:none;\">".$row[1]."</td></tr>";
+			$data_table_project.="<tr><td class=\"name\" style=\"border:none;\"><a href=\"all_course.php?project_id=".$row[0]." \">".$row[1]."</a></td></tr>";
 		/*	if(accessRole("NEW_EDIT_DELETE_CATEGORY_COURSE",$connection))
 			{
 			$data_table_category.="<i class=\"fa fa-pencil\"></i></a></td><td style=\"\" class=\"right\"><a href=\"#\" onclick=\"activate_category(".$row[0]."); return false;\"><i id=\"category".$row[0]."\" class=\"".$active_cat."\"></i></a></td></tr>";
