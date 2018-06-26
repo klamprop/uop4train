@@ -1,9 +1,9 @@
- <?php 
- 
+ <?php
+
 	include "header.php";
-	
+
 	accessRole("NEW_EDIT_DELETE_COURSE",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
-	
+
 	if($_POST["action"] == "ins")
 	{
 		if(isset($_POST["active"]))
@@ -39,7 +39,7 @@
 		}
 		else
 		{
-		
+
 			$query_insert_course = "INSERT INTO tbl_courses(title, sdescription, content, course_item_id, author, create_date, modify_date, publisher,".
 									"language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, ".
 									"duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType,".
@@ -54,7 +54,7 @@
 									$_POST["interactivityType"]."','".$_POST["learningResourseType"]."','".$_POST["licence"]."','".$_POST["isBasedOnURL"]."','".
 									$_POST["educationalRole"]."','".$_POST["audienceType"]."',".$active.",".$publish_to_anonymous.",".$_SESSION["USERID"].")";
 		}
-		
+
 		$result_insert_course = $connection->query($query_insert_course) or die("Error in course Insert.." . mysqli_error($connection));
 
 		$Insid = $connection->insert_id;
@@ -70,8 +70,8 @@
 			$query_insert_category = "INSERT INTO tbl_project_course(course_id, project_id) VALUES (".$Insid.",".$_POST["project"][$i].")";
 			$result_insert_category = $connection->query($query_insert_category) or die("Error in query.." . mysqli_error($connection));
 		}
-		
-		
+
+
 		if($_GET["citem"] == 1)
 		{
 			?>
@@ -108,7 +108,7 @@
 		{
 			$active=0;
 		}
-		
+
 		if(isset($_POST["publish_to_anonymous"]))
 		{
 			$publish_to_anonymous=1;
@@ -117,7 +117,7 @@
 		{
 			$publish_to_anonymous=0;
 		}
-		
+
 		if($_GET["citem"]==3)
 		{
 			$query_update = "UPDATE tbl_courses SET title='".mysqli_real_escape_string($connection,$_POST["title"])."',sdescription='".mysqli_real_escape_string($connection,$_POST["sdescription"]).
@@ -128,7 +128,7 @@
 			$_POST["typicalAgeRange"]."',interactivityType='".$_POST["interactivityType"]."',learningResourseType='".$_POST["learningResourseType"].
 			"',licence='".$_POST["licence"]."',isBasedOnURL='".$_POST["isBasedOnURL"]."',educationalRole='".$_POST["educationalRole"]."',audienceType='".
 			$_POST["audienceType"]."',active=".$active.",publish_to_anonymous=".$publish_to_anonymous.",interactive_category=".$_POST["select_interactive_part"].
-			",interactive_item=".$_POST["select_interactive_item"].", interactive_url='".$_POST["item_url"]."', iframe_height='".$_POST["item_iframe_height"]."' WHERE id=".$_GET["id"];		
+			",interactive_item=".$_POST["select_interactive_item"].", interactive_url='".$_POST["item_url"]."', iframe_height='".$_POST["item_iframe_height"]."' WHERE id=".$_GET["id"];
 		}
 		else
 		{
@@ -141,8 +141,8 @@
 			"',duration='".$_POST["duration"]."',typicalAgeRange='".$_POST["typicalAgeRange"]."',interactivityType='".$_POST["interactivityType"].
 			"',learningResourseType='".$_POST["learningResourseType"]."',licence='".$_POST["licence"]."',isBasedOnURL='".$_POST["isBasedOnURL"].
 			"',educationalRole='".$_POST["educationalRole"]."',audienceType='".$_POST["audienceType"]."',active=".$active.",publish_to_anonymous=".
-			$publish_to_anonymous." WHERE id=".$_GET["id"];		
-			
+			$publish_to_anonymous." WHERE id=".$_GET["id"];
+
 		}
 		$result_update = $connection->query($query_update) or die("Error in query .." . mysqli_error($connection));
 
@@ -150,10 +150,18 @@
 		$result_delete_cat = $connection->query($query_delete_cat);
 		for($i=0;$i<count($_POST["cat"]);$i++)
 		{
-			$query_insert_category = "INSERT INTO tbl_match_course_category(course_id, course_category_id) VALUES (".$_GET["id"].",".$_POST["cat"][$i].")";			
+			$query_insert_category = "INSERT INTO tbl_match_course_category(course_id, course_category_id) VALUES (".$_GET["id"].",".$_POST["cat"][$i].")";
 			$result_insert_category = $connection->query($query_insert_category);
 		}
-		
+
+    $query_delete_project = "DELETE FROM tbl_project_course WHERE course_id=".$_GET["id"];
+		$result_delete_project = $connection->query($query_delete_project);
+		for($i=0;$i<count($_POST["project"]);$i++)
+		{
+			$query_insert_project = "INSERT INTO tbl_project_course(course_id, project_id) VALUES (".$_GET["id"].",".$_POST["project"][$i].")";
+			$result_insert_project = $connection->query($query_insert_project);
+		}
+
 		if($_GET["citem"] == 1)
 		{
 			?>
@@ -178,9 +186,9 @@
 			</script>
 			<?php
 		}
-		
+
 	}
-	
+
 	if(isset($_GET['id']))
 	{
 		$query_select ='';
@@ -188,14 +196,14 @@
 		{
 			$query_select = '';
 		}
-		else 
+		else
 		{
 			$query_select = " AND create_uid=".$_SESSION['USERID'];
 		}
-			
+
 		$query_select_mycourse= "SELECT title, sdescription, content, course_item_id, author, create_date, modify_date, publisher, language, about, alignmentType, educationalFramework, targetName, targetDescription, targetURL, educationalUse, duration, typicalAgeRange, interactivityType, learningResourseType, licence, isBasedOnURL, educationalRole, audienceType, active, publish_to_anonymous, create_uid,interactive_category,interactive_item,interactive_url, iframe_height  FROM tbl_courses WHERE id =".$_GET['id'].$query_select;
 		$result_select_mycourse = $connection->query($query_select_mycourse);
-		
+
 		if($result_select_mycourse->num_rows == 0)
 		{
 		?>
@@ -204,7 +212,7 @@
 			</script>
 		<?php
 		}
-		
+
 		while($row = $result_select_mycourse->fetch_array()){
 			$title = $row[0];
 			$sdescription = $row[1];
@@ -239,7 +247,7 @@
 			$iframe_height = $row[30];
 		}
 	}
- 
+
  ?>
 <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div>
@@ -247,27 +255,27 @@
 		<a href="#" id="return_back" style="text-decoration:none;">
 			<span class="fa fa-arrow-circle-o-left fa-lg black"></span>
 		</a>
-		<?php 
+		<?php
 			$label = '';
-			if($_GET["citem"] == 1){				
+			if($_GET["citem"] == 1){
 				$label = 'Course Module';
-			}else if($_GET["citem"] == 2){				
+			}else if($_GET["citem"] == 2){
 				$label = 'Course Presentation Part';
-			}else if($_GET["citem"] == 3){				
+			}else if($_GET["citem"] == 3){
 				$label = 'Course Interactive Part';
 			}
-			
-			if(isset($_GET['id'])){ 
+
+			if(isset($_GET['id'])){
 				echo "Edit ".$label;
-			} else { 
+			} else {
 				echo "New ".$label;
 			} ?>
 	</h1>
 	</div>
 
-	
+
 	<!-- <div class=" col-md-4">	 -->
-		<form method="post" id="insert_course1" action="courses.php?<?php if(isset($_GET["id"])){ echo "id=".$_GET["id"]; } if(isset($_GET["citem"])){ echo "&citem=".$_GET["citem"]; } ?>" enctype="multipart/form-data"  onsubmit="return postForm()">	
+		<form method="post" id="insert_course1" action="courses.php?<?php if(isset($_GET["id"])){ echo "id=".$_GET["id"]; } if(isset($_GET["citem"])){ echo "&citem=".$_GET["citem"]; } ?>" enctype="multipart/form-data"  onsubmit="return postForm()">
 			<div>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-default">
@@ -292,7 +300,7 @@
 										<input type="text" class="form-control" id="sdescription" name="sdescription"  placeholder="Give a short description of your course" value="<?php if(isset($_GET["id"])){ echo $sdescription;} ?>">
 									</div>
 								</div>
-								<?php 
+								<?php
 								if($_GET["citem"] == 3)
 								{
 									?>
@@ -303,7 +311,7 @@
 												<select class="form-control" id="select_interactive_part" name="select_interactive_part" onchange="fill_cmb_select_interactive_parts(this); return false;" >
 													<option <?php if(isset($interactive_category)) { if($interactive_category==0){ echo "selected";} } ?> value="0">Select Interactive Part</option>
 													<option <?php if(isset($interactive_category)) { if($interactive_category==1){ echo "selected";} } ?> value="1">Interactive Widget</option>
-													<option <?php if(isset($interactive_category)) { if($interactive_category==2){ echo "selected";} } ?> value="2">Interactive App</option>								
+													<option <?php if(isset($interactive_category)) { if($interactive_category==2){ echo "selected";} } ?> value="2">Interactive App</option>
 												</select>
 											</div>
 										</div>
@@ -314,7 +322,7 @@
 											<label>Interactive Item :</label>
 											<div class="input-control select">
 												<select class="form-control" id="select_interactive_item" name="select_interactive_item" onchange="fill_cmb_select_interactive_item(this); return false;">
-													
+
 												</select>
 											</div>
 										</div>
@@ -335,16 +343,16 @@
 })</script>
 										</div>
 									</div>
-									
+
 									<?php
-								}								
+								}
 								?>
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label>Course Content :</label>
-										<div >							
+										<div >
 											<textarea class="summernote" id="summernote" name="content" rows="18"></textarea>
-										</div>	
+										</div>
 									</div>
 								</div>
 								<div class="row">
@@ -395,28 +403,28 @@
 										<label for="InputCategory">Category : (ctrl+click to multi select categories)</label>
 										<select multiple name="cat[]" id="category" class="form-control">
 										<?php
-										
-											$query_select_category = "SELECT id, name FROM tbl_category_courses WHERE active=1 ";//AND course_item_id=".$_GET["citem"];				
+
+											$query_select_category = "SELECT id, name FROM tbl_category_courses WHERE active=1 ";//AND course_item_id=".$_GET["citem"];
 											$result_select_category = $connection->query($query_select_category) or die("Error in query.." . mysqli_error($connection));
 											$i_category=0;
-												
-											while($row = $result_select_category->fetch_row()){			
+
+											while($row = $result_select_category->fetch_row()){
 												$num_rows =0;
 												if(isset($_GET['id']))
 												{
 													$query_select_categories = "SELECT id FROM 	tbl_match_course_category WHERE course_id=".$_GET['id']." AND course_category_id=".$row[0];
-													$result_select_categories = $connection->query($query_select_categories) or die("Error in query.." . mysqli_error($connection));												
+													$result_select_categories = $connection->query($query_select_categories) or die("Error in query.." . mysqli_error($connection));
 													$num_rows = $result_select_categories->num_rows;
 												}
-												if ($num_rows>0) 
-												{						
+												if ($num_rows>0)
+												{
 													echo "<option selected value=\"".$row[0]."\">".$row[1]."</option>";
 												}
 												else
 												{
 													echo "<option value=\"".$row[0]."\" >".$row[1]."</option>";
 												}
-													
+
 												$i_category++;
 											}
 										?>
@@ -428,28 +436,28 @@
 										<label for="InputCategory">Projects : (ctrl+click to multi select categories)</label>
 										<select multiple name="project[]" id="project" class="form-control">
 										<?php
-										
-											$query_select_category = "SELECT id, name FROM tbl_project WHERE active=1 ";//AND course_item_id=".$_GET["citem"];				
+
+											$query_select_category = "SELECT id, name FROM tbl_project WHERE active=1 ";//AND course_item_id=".$_GET["citem"];
 											$result_select_category = $connection->query($query_select_category) or die("Error in query.." . mysqli_error($connection));
 											$i_category=0;
-												
-											while($row = $result_select_category->fetch_row()){			
+
+											while($row = $result_select_category->fetch_row()){
 												$num_rows =0;
 												if(isset($_GET['id']))
 												{
 													$query_select_categories = "SELECT id FROM 	tbl_project_course WHERE course_id=".$_GET['id']." AND project_id=".$row[0];
-													$result_select_categories = $connection->query($query_select_categories) or die("Error in query.." . mysqli_error($connection));												
+													$result_select_categories = $connection->query($query_select_categories) or die("Error in query.." . mysqli_error($connection));
 													$num_rows = $result_select_categories->num_rows;
 												}
-												if ($num_rows>0) 
-												{						
+												if ($num_rows>0)
+												{
 													echo "<option selected value=\"".$row[0]."\">".$row[1]."</option>";
 												}
 												else
 												{
 													echo "<option value=\"".$row[0]."\" >".$row[1]."</option>";
 												}
-													
+
 												$i_category++;
 											}
 										?>
@@ -563,11 +571,11 @@
 				<input type="hidden" id="action"  name="action" value="<?php if(isset($_GET["id"])) {echo "upd";}else{ echo "ins";} ?>"></input>
 				<input type="hidden" id="course_item_id"  name="course_item_id" value="<?php if(isset($_GET["citem"])){if($_GET["citem"]=="1"){echo "1";}else if($_GET["citem"]=="2"){echo "2";}else if($_GET["citem"]=="3"){echo "3";}} ?>"></input>
 				<input type="hidden" id="course_id"  name="course_id" value=""></input>
-								
-								
-								
-								
-				<div class="col-sm-12">	
+
+
+
+
+				<div class="col-sm-12">
 					<br><br>
 					<?php if(isset($_GET['id'])){ ?>
 						<input type="submit" id="submit_course" value="Save Changes"></input>
@@ -576,14 +584,14 @@
 					<?php } ?>
 					<br><br>
 				</div>
-			
+
 			</div>
-		
+
 		</form>
-		
-		
+
+
 		<?php
-		if(isset($_GET['id']) && isset($_GET["citem"])){ 
+		if(isset($_GET['id']) && isset($_GET["citem"])){
 		?>
 			<div class="page-header">
 				<h1>Extra features</h1>
@@ -591,11 +599,11 @@
 		<?php
 		}
 		?>
-		
-		
-		
-		<?php 
-			if(isset($_GET['id']) && isset($_GET["citem"])){ 
+
+
+
+		<?php
+			if(isset($_GET['id']) && isset($_GET["citem"])){
 				if($_GET["id"]>0 && $_GET["citem"]==1)
 				{
 			?>
@@ -604,15 +612,15 @@
 							<h3 class="panel-title">Select Learning Record Store(LRS)</h3>
 						</div>
 						<div class="panel-body">
-							<div class="col-sm-12">	
+							<div class="col-sm-12">
 								<select class="form-control" id="select_lrs">
 									<option value="0">Select Learning Record Store</option>
 										<?php
 										$query_select_lrs= "SELECT id, lrs_name FROM lrs_details WHERE uid =".$_SESSION['USERID'];
 										$result_select_lrs = $connection->query($query_select_lrs);
-									
+
 										while($row = $result_select_lrs->fetch_array()){
-											
+
 											$query_select_current_lrs= "SELECT lrs_id FROM match_course_lrs WHERE course_id =".$_GET['id'];
 											$result_select_current_lrs = $connection->query($query_select_current_lrs);
 											if($result_select_current_lrs->num_rows > 0)
@@ -629,23 +637,23 @@
 										}
 										?>
 								</select>
-		
+
 								<br />
 								<div class="col-md-4">
 									<a href="#" id="lrs_save" class="btn btn-primary form-control" onclick="if(document.getElementById('select_lrs').value != 0){ save_course_lrs(document.getElementById('select_lrs').value); return false;}else{ delete_course_lrs(document.getElementById('select_lrs').value);} return false;">Save LRS</a>
 								</div>
 							</div>
 						</div>
-					</div>			
-			<?php 	} 
+					</div>
+			<?php 	}
 			}
 		?>
 			<br />
-		
-		<?php 
+
+		<?php
 			if(isset($_GET['id'])){ ?>
 				<div class="row">
-					<div class="col-sm-12">	
+					<div class="col-sm-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">Change author</h3>
@@ -662,19 +670,19 @@
 									<a href="#" onclick="send_course_to_new_author(); return false;" class="btn btn-primary">Send</a>
 								</div>
 							</div>
-						</div>				
+						</div>
 					</div>
 				</div>
 		<?php } ?>
 			</br />
-	
+
 				<?php
-				
+
 				if(isset($_GET["id"]) && isset($_GET["citem"]))
-				{ 
+				{
 					if($_GET["id"]>0 && $_GET["citem"]==1)
 					{
-				?>	
+				?>
 					<br />
 						<div class="row">
 							<div class="col-md-12">
@@ -684,7 +692,7 @@
 									</div>
 									<div class="panel-body">
 										<div class="form-container">
-											<div class="form-group">											
+											<div class="form-group">
 												<input class='file' type="file" class="form-control" name="images" id="images" placeholder="Please choose your image">
 												<span class="help-block"></span>
 											</div>
@@ -702,7 +710,7 @@
 											<div id="success_div"></div>
 										</div>
 									</div>
-								</div>	
+								</div>
 								<br />
 								<div class="panel panel-default">
 									<div class="panel-heading">
@@ -720,11 +728,11 @@
 													<ul class="fa-ul">
 														<li><span id="generate_epub_file_spin" style="padding-top:25px;"></span><a href="#" type="button" <?php if(isset($_GET["id"])){ if($_GET["id"]>0){ echo "";}else {echo "disabled=\"disabled\"";}}else {echo "disabled=\"disabled\"";} ?> onclick="generate_epub();return false;" class="btn btn-success" id="generate_epub">&nbsp;Generate e-pub file</a></li>
 													</ul>
-													
-													
+
+
 												</div>
 											</div>
-										</div>								
+										</div>
 										<div class="row">
 											<div class="form-group col-md-8" style="padding-left:20px;">
 												<h3>Generate scorm file</h3>
@@ -738,44 +746,44 @@
 													</ul>
 												</div>
 											</div>
-										</div>	
+										</div>
 									</div>
-								</div>	
-								
-								
+								</div>
+
+
 							</div>
 						</div>
 						<br />
-						
-						
+
+
 				<?php
 					}
-					
+
 				}else if($_GET["citem"]==1 && !isset($_GET["id"]) || $_GET["id"]<=0)
 					{
 						?>
-						
+
 						<p class="bg-danger" style="padding:15px;">Create your course and then you can generate epub file and scorm package.</p>
-						
+
 						<?php
 					}
 				?>
 
 	<!-- </div> -->
-	
+
 <!--  ------------------------  END CONTENT      ------------------------      -->
-	
+
 	<script>
-	
+
 	var xxx=<?php print $_GET["id"]; ?>
 
 		$("#image_upload").click(function()
         {
-			//data to be sent to server         
-			var post_data = new FormData();    
+			//data to be sent to server
+			var post_data = new FormData();
 			post_data.append( 'course_id', xxx );
 			post_data.append( 'images', $('input[name=images]')[0].files[0] );
-			
+
 			$.ajax({
 				url: "functions/upload_course_images.php",
 				data: post_data,
@@ -785,41 +793,41 @@
 				dataType: "json",
 				success: function(msg){
 					alert(msg.txt);
-				}					
+				}
 			});
-			
+
 			return false;
-			
+
         });
-		
-		
-		
+
+
+
 		$('#return_back').click(function(){
 			parent.history.back();
 			return false;
 		});
-		
+
 		$('.summernote').summernote({
 			  height: 500,                 // set editor height
 											//width: 450,
 
 			minHeight: null,             // set minimum height of editor
 			maxHeight: null,             // set maximum height of editor
-	
+
 			focus: true                // set focus to editable area after initializing summernote
-			
+
 			});
-		
+
 		$('#upload_Front_cover').click(function(){
 			alert('Front Cover');
 			return false;
 		});
-		
+
 		$('#upload_Back_cover').click(function(){
 			alert('Back Cover');
 			return false;
 		});
-		
+
 
 		 var postForm = function() {
                         var content = $('textarea[name="content"]').html($('#summernote').code());
@@ -843,24 +851,24 @@
 		}
 
 
-		
+
 		var userid=<?php echo $_SESSION["USERID"]; ?>;
-		
+
 		var interactive_items=document.getElementById('interactive_item_').value;
-		
+
 		if(document.getElementById('select_interactive_part').value == 1)
 		{
 			$('#select_interactive_item').load('functions/fill_widget.php?select_interactive_part=1&interactive_items='+interactive_items+'&USERID='+userid).fadeIn("slow");
 			fill_cmb_select_interactive_item_initial(interactive_items);
 		}
-		
+
 		function fill_cmb_select_interactive_parts(select_part)
 		{
 			 var selectedOption = select_part.options[select_part.selectedIndex];
 
 			if(selectedOption.value==1)
 			{
-				//select all install widget			
+				//select all install widget
 				$('#select_interactive_item').load('functions/fill_widget.php?select_interactive_part=1&USERID='+userid).fadeIn("slow");
 			}
 			else if(selectedOption.value==2)
@@ -871,59 +879,59 @@
 			{
 				$('#select_interactive_item').load('functions/fill_widget.php?select_interactive_part=0&USERID='+userid).fadeIn("slow");
 			}
-			
-			
+
+
 		}
 		function fill_cmb_select_interactive_item(selected_itel_id)
 		{
 			var selectedItem = selected_itel_id.options[selected_itel_id.selectedIndex];
 			if(selectedItem.value>0)
 			{
-				
+
 				data_post = 'cid=' + selectedItem.value + '&userid='+userid;
-					
+
 				$.ajax({
 					type: "POST",
 					url: "functions/select_item_url_description.php",
 					data: data_post,
 					dataType: "json",
 					success: function(msg){
-						var data_values = msg.txt.split("|"); 
-						
+						var data_values = msg.txt.split("|");
+
 						$('#item_url').val(data_values[0]);
 						//$('#item_description').code(data_values[1]);
 						$('#item_description').text(data_values[1]);
-					}							
+					}
 				});
 			}
-			
+
 		}
 		var selected_item_id;
 		function fill_cmb_select_interactive_item_initial(selected_item_id)
 		{
 			if(selected_item_id>0)
 			{
-				
+
 				data_post = 'cid=' + selected_item_id + '&userid='+userid;
-					
+
 				$.ajax({
 					type: "POST",
 					url: "functions/select_item_url_description.php",
 					data: data_post,
 					dataType: "json",
 					success: function(msg){
-						var data_values = msg.txt.split("|"); 
+						var data_values = msg.txt.split("|");
 						<?php if(!isset($interactive_url)) { ?>
 						$('#item_url').val(data_values[0]);
 						<?php } ?>
 						//$('#item_description').code(data_values[1]);
 						$('#item_description').text(data_values[1]);
-					}							
+					}
 				});
 			}
-			
+
 		}
-		
+
 		var active_int_part;
 		var int_cid;
 		function edit_interactive_part( int_cid)
@@ -936,7 +944,7 @@
 			{
 				active_int_part=0;
 			}
-			
+
 			if(document.getElementById('published').checked)
 			{
 				published_int_part=1;
@@ -945,8 +953,8 @@
 			{
 				published_int_part=0;
 			}
-			
-			
+
+
 			if( int_cid > 0 )
 			{
 				var data_post = 'title=' + document.getElementById('title').value+'&description=' + $('#summernote').code()  + '&category_item='+String($('#category1_items').val() || []) + '&interactive_category='+document.getElementById ("select_interactive_part").value + '&interactive_items='+document.getElementById ("select_interactive_item").value + '&url='+document.getElementById ("item_url").value + '&active='+active_int_part + '&published='+published_int_part+'&author='+userid+'&int_cid='+int_cid;
@@ -958,13 +966,13 @@
 					dataType: "json",
 					success: function(msg){
 						window.location.href="my_interactive_courses_part.php";
-					}							
+					}
 				});
 			}
 			else
 			{
 				var data_post = 'title=' + document.getElementById('title').value+'&description=' + $('#summernote').code() + '&category_item='+String($('#category1_items').val() || []) + '&interactive_category='+document.getElementById ("select_interactive_part").value + '&interactive_items='+document.getElementById ("select_interactive_item").value + '&url='+document.getElementById ("item_url").value + '&active='+active_int_part + '&published='+published_int_part+ '&author='+userid+'&int_cid='+int_cid;
-			
+
 				$.ajax({
 					type: "POST",
 					url: "functions/edit_interactive_course.php",
@@ -972,19 +980,19 @@
 					dataType: "json",
 					success: function(msg){
 						window.location.href="my_interactive_courses_part.php";
-					}							
+					}
 				});
-				
+
 			}
 		}
-		
+
 		function generate_epub()
 		{
 			document.getElementById('generate_epub_file_spin').innerHTML='<i class="fa-li fa fa-spinner fa-spin"></i>';
 			document.getElementById('generate_epub_file').style.display = 'none';
 			$.ajax({
 					type: "POST",
-					url: "functions/epub/epub_course1.php?course_id=<?php echo $_GET['id']; ?>",					
+					url: "functions/epub/epub_course1.php?course_id=<?php echo $_GET['id']; ?>",
 					dataType: "json",
 					success: function(msg){
 
@@ -995,74 +1003,74 @@
 							//alert(msg.txt);
 						}
 						//alert(msg.txt);
-					}							
+					}
 				});
 		}
-		
+
 		function generate_scorm()
 		{
 			document.getElementById('generate_scorm_pkg_spin').innerHTML='<i class="fa-li fa fa-spinner fa-spin"></i>';
 			document.getElementById('generate_scorm_pkg').style.display = 'none';
-			
-			
+
+
 			$.ajax({
 					type: "POST",
-					url: "functions/create_scorm_pkg.php?course_id=<?php echo $_GET['id']; ?>",					
+					url: "functions/create_scorm_pkg.php?course_id=<?php echo $_GET['id']; ?>",
 					dataType: "json",
 					success: function(msg){
 						if(msg.status==1)
 						{
 							document.getElementById('generate_scorm_pkg_spin').innerHTML='';
 							document.getElementById('generate_scorm_pkg').style.display = 'block';
-							
+
 						}
-					}							
+					}
 				});
 		}
-		
-	
-		
+
+
+
 
 										function image_upload(){
 											alert('1');
-											
+
 											var str = $( "#upload_course_image" ).serialize();
 											alert(str);
 											$.ajax({
 												type: "POST",
 												data: new FormData(this),
-												url: "functions/upload_course_images.php?course_id=<?php echo $_GET['id']; ?>",					
+												url: "functions/upload_course_images.php?course_id=<?php echo $_GET['id']; ?>",
 												dataType: "json",
 												success: function(msg){
 													alert('2');
-												}							
+												}
 											});
 										}
 
 		function save_course_lrs(lrs_id){
-			
+
 			$.ajax({
 					type: "POST",
 					url: "functions/save_lrs.php?lrs_id="+lrs_id+"&cid=<?php print $_GET["id"]; ?>",
 					dataType: "json",
 					success: function(msg){
 						alert(msg.txt);
-					}							
-			});			
+					}
+			});
 		}
-		
+
 		function delete_course_lrs(lrs_id1){
-			
+
 			$.ajax({
 					type: "POST",
 					url: "functions/save_lrs.php?lrs_id="+lrs_id1+"&action=del&cid=<?php print $_GET["id"]; ?>",
 					dataType: "json",
 					success: function(msg){
 						alert(msg.txt);
-					}							
-			});			
+					}
+			});
 		}
-		
+
 		function send_course_to_new_author(){
 			if($('#chg_email_author').val()!=''){
 			$.ajax({
@@ -1071,13 +1079,13 @@
 					dataType: "json",
 					success: function(msg){
 						alert(msg.txt);
-					}							
+					}
 			});
 			}else{
 				alert('Insert email!');
 			}
 		}
-		
+
 	</script>
-	
+
  <?php include "footer.php"; ?>

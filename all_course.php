@@ -19,6 +19,16 @@
 
 	$url_lrs_endpoint = '&endpoint='.rawurlencode($_lrs_endpoint_url).'&auth=Basic%20'.urlencode(base64_encode($_lrs_username.":".$_lrs_password)).'&actor='.str_replace('%27','&quot;',rawurlencode("{'mbox' : 'kostas.bakoulias@gmail.com', 'name' : 'Costas Bakoulias'}"));	*/
 
+  $query_select= "SELECT id, name, active FROM tbl_course_types";// WHERE id =".$_GET['citem'];
+  $result_select = $connection->query($query_select);
+
+  while($rowcat = $result_select->fetch_array()){
+    $id=$rowcat[0];
+    $name=$rowcat[1];
+    $active=$rowcat[2];
+  }
+
+
 ?>
 
 
@@ -26,23 +36,54 @@
 	<div class="container" >
 		<div class="row"  >
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-top:20px;padding-bottom:50px">
-      <h2 style="color:#636365" >Categories</h2>
+      <h2 style="color:#636365" ><b>Categories</b></h2>
+        <div id="table_cat">
+        </div>
+      <h2 style="color:#636365" ><b>Projects</b></h2>
+        <div id="table_prj">
+        </div>
       </div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="padding-top:20px;padding-bottom:50px">
-			     <h2 style="color:#636365" >List of courses</h2>
-           <?php printTeaserPublicCourses($connection); ?>
+			     <h2 style="color:#636365" ><b>List of courses</b></h2>
+           <?php
+	          if(isset($_GET['project']))
+            {
+              printSMESECCourses($connection);
+            }else
+           printTeaserPublicCourses($connection);
+
+           ?>
 			</div>
 		</div>
 	</div>
 </section>
 
+
  <?php include "footer.php"; ?>
 
 
+ <script>
 
-
-
-
+   var catid=0;
+   var citem="<?php echo  $_GET['citem']; ?>";// if(isset($_GET['citem'])){	if(!empty($_GET['citem'])){}}
+   var link = 'functions/select_cat_courses_list.php';//?citem='+citem;
+   var link2 = 'functions/select_proj_courses_list.php';
+   $(document).ready(function(){
+   <?php
+     if(accessRole("VIEW_ALL_COURSES",$connection))
+     {
+   ?>
+       $('#table_cat').load(link).fadeIn("slow");
+       $('#table_prj').load(link2).fadeIn("slow");
+   <?php
+     }
+   ?>
+     $('#insert_course').submit(function(e) {
+       insert_category();
+       e.preventDefault();
+     });
+   });
+   </script>
 
 
 
@@ -61,6 +102,16 @@ function printTeaserSignUpCourses($connection){
  printCoursesTeaser($connection, $query_select_courses);
 
  }
+
+
+ function printSMESECCourses($connection){
+  $query_select_courses= "SELECT * FROM tbl_project_course WHERE project_id=2  AND course_item_id=1 AND active=1 order by modify_date DESC LIMIT 12";
+  $result_select_courses = $connection->query($query_select_courses);
+
+
+  printCoursesTeaser($connection, $query_select_courses);
+
+  }
 
 function printCoursesTeaser($connection, $query_select_courses){
  $result_select_course = $connection->query($query_select_courses)  or die("Error in query.." . mysqli_error($connection));

@@ -279,12 +279,21 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 								</ul>
 							</li>
 
+              <?php
+                if(accessRole("VIEW_CATEGORY_COURSE",$connection))
+                {
+              ?>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="newproject.php">Create Project</a></li>
+									<li><a href="list_project.php">View Projects</a></li>
 								</ul>
 							</li>
+              <?php
+              }
+              ?>
+
 
 							<?php
 

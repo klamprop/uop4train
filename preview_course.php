@@ -117,6 +117,7 @@
 
 			$count_list++;
 		}
+
 	}
 
 
@@ -321,10 +322,10 @@
 	<div itemscope="" itemtype="http://schema.org/CreativeWork" >
 		<div id="FORGETitleWindow" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 			<h1>
-				<a href="index.php" id="return_back" style="text-decoration:none;">
-					<span class="fa fa-arrow-circle-o-left fa-lg black"></span>
-				</a>
-				FORGE Course
+				<a href="all_course.php" style="text-decoration:none;">
+					<span class="fa fa-arrow-circle-o-left fa-sm black"></span>
+				  <span  style="color:black;">View all Courses</span>
+					</a>
 			</h1>
 
 		</div>
@@ -463,66 +464,26 @@
 		{
 		?>
 			<div id="CourseViewMenu"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<a class="btn btn-private" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>">Full Height</a>&nbsp;|&nbsp;
-						<a class="btn btn-private" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=twocol">Two columns</a>&nbsp;|&nbsp;
-						<a class="btn btn-private" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>&nbsp;|&nbsp;
-						<a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET["preview"])){ if($_GET["preview"]=="twocol"){echo "&preview=twocol&noheaders=1";}if($_GET["preview"]=="section"){echo "&preview=section&noheaders=1";}}else{echo "&noheaders=1";}?>" onclick=""><i class="glyphicon glyphicon-fullscreen" ></i></a>
+				<div class="row" style="margin:5px;">
+						<a class="btn btn-primary btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=full">Full Height</a>&nbsp;|&nbsp;
+						<a class="btn btn-primary btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>&nbsp;
+				</div>
 			</div>
 		<?php
 		}
 		?>
 
 		<?php
-		if(isset($_GET['preview']))
+
+		if(isset($_GET['preview']) )
+
 		{
-			if($_GET['preview']=="twocol")
+
+ 			if(($_GET['preview']=="section") || ($_GET['preview']=="full"))
 			{
 
-				echo '<div id="twocols" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="">';
-				if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
-				{
-					?>
-					<div class="row" style="float:right; font-size:20px; padding-right:15px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
-					<?php
-				}
-				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px;    height: inherit;"  > ';
-				echo "<div style=\"height:inherit; overflow:scroll;\">";
-
-				printCoursePart($connection, $_GET['course_id'],"twocol", 0,$url_iframe); //printModule Content in left part column
-
-				for($i=0; $i<$count_list;$i++)
-				{
-					echo "<div itemprop=\"citation\">";
-					if($presentation_id[$i]>0 && $interactive_id[$i]==0)
-					{
-						printCoursePart($connection, $presentation_id[$i],"",0,$url_iframe);
-					}
-					echo "</div>";
-				}
-				echo "</div>";
-				echo "</div>";
-				//Now print right column with interaction parts
-				echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left: 0;padding-right: 0px;    height: inherit;" >';
-				echo "<div style=\"height:inherit; overflow:scroll;\">";
-				for($i=0; $i<$count_list;$i++)
-				{
-					echo "<div itemprop=\"citation\">";
-					if($presentation_id[$i]==0 && $interactive_id[$i]>0)
-					{
-						//interactive
-						printCoursePart($connection, $interactive_id[$i],"","",$url_iframe);
-					}
-					echo "</div>";
-				}
-				echo "</div>";
-				echo "</div>";
-				echo "</div>";
-
-
-			}
-			else if($_GET['preview']=="section")
+ 			if(($_GET['preview']=="section")) // worst code ever written!!!
 			{
-
 
 				if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
 				{
@@ -531,6 +492,12 @@
 					<?php
 				}
 				echo '<div class="row">';
+
+
+				echo "<div style=\"text-align:center;\"><h1>";
+				printCoursePart($connection, $_GET['course_id'],"",0,$url_iframe);
+			  echo "</h1></div>";
+
 				echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="border-right:1px solid #000000; padding-right:0px;" >';
 				echo "<div class=\"tab-control\" data-role=\"tab-control\">";
 				echo "<ul id=\"myTab\" class=\"nav coursesections flex nav-pills nav-stacked\" >";
@@ -548,12 +515,12 @@
 						while($row = $result_select_present->fetch_array()){
 							if($count_pres==1)
 							{
-								echo '<li class="active"><a href="#_page_'.$count_pres.'" data-toggle="tab" >Part - '.$count_pres.'</a></li>';
+								echo '<li class="active"><a href="#_page_'.$count_pres.'" data-toggle="tab" >'.$row[title].'</a></li>';
 
 							}
 							else
 							{
-								echo '<li><a href="#_page_'.$count_pres.'" data-toggle="tab">Part - '.$count_pres.'</a></li>';
+								echo '<li><a href="#_page_'.$count_pres.'" data-toggle="tab">'.$row[title].'</a></li>';
 							}
 
 						}
@@ -586,10 +553,12 @@
 				echo "</div>";
 
 				echo '<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 coursecontent" >';
-				echo "<div id=\"myTabContent\" class=\"tab-content\" style=\"margin-left:15px;\">";
+				echo "<div id=\"myTabContent\" class=\"tab-content\" style=\"margin-left:20px;\">";
+
 				//$count_pres=0;
 				//printCoursePart($connection, $_GET['course_id'] , "section", $count_pres);  //printModule Content in first tab
 				$count_pres=1;
+
 				for($i=0; $i<$count_list;$i++)
 				{
 					if($presentation_id[$i]>0 && $interactive_id[$i]==0)
@@ -610,13 +579,134 @@
 				echo "</div>";
 				echo "</div>";
 				echo "</div>";
-
-
 			}
 
+ 			else if(($_GET['preview']=="full")) // worst code ever written!!!
+			 {
+				if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
+					{
+						?>
+						<div class="row" style="float:right; font-size:20px; padding-right:35px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
+						<?php
+					}
+				printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
+
+				for($i=0; $i<$count_list;$i++)
+				{
+					echo "<span itemprop=\"citation\">";
+					if($presentation_id[$i]>0 && $interactive_id[$i]==0)
+					{
+						printCoursePart($connection, $presentation_id[$i],"","",$url_iframe);
+					}
+					else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
+					{
+						printCoursePart($connection, $interactive_id[$i],"","",$url_iframe);
+					}
+					echo "</span>";
+				}
+			}
 		}
+	}
 		else
 		{
+			if ($count_list>0) // the stupidity of my code is unprecedented 
+			{
+								if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
+								{
+									?>
+									<div class="row" style="float:right; font-size:20px; padding-right:15px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
+									<?php
+								}
+								echo '<div class="row">';
+
+
+								echo "<div style=\"text-align:center;\"><h1>";
+								printCoursePart($connection, $_GET['course_id'],"",0,$url_iframe);
+							  echo "</h1></div>";
+
+								echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="border-right:1px solid #000000; padding-right:0px;" >';
+								echo "<div class=\"tab-control\" data-role=\"tab-control\">";
+								echo "<ul id=\"myTab\" class=\"nav coursesections flex nav-pills nav-stacked\" >";
+								//$count_pres=0;
+								//echo "<li class=\"active\"><a href=\"#_page_".$count_pres."\">Part - ".$count_pres."</a></li>";
+								$count_pres=1;
+								for($i=0; $i<$count_list;$i++)
+								{
+									if($presentation_id[$i]>0 && $interactive_id[$i]==0)
+									{
+										//presentation
+										$query_select_present= "SELECT title FROM tbl_courses WHERE id=".$presentation_id[$i];
+										$result_select_present = $connection->query($query_select_present);
+
+										while($row = $result_select_present->fetch_array()){
+											if($count_pres==1)
+											{
+												echo '<li class="active"><a href="#_page_'.$count_pres.'" data-toggle="tab" >'.$row[title].'</a></li>';
+
+											}
+											else
+											{
+												echo '<li><a href="#_page_'.$count_pres.'" data-toggle="tab">'.$row[title].'</a></li>';
+											}
+
+										}
+
+									}
+									else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
+									{
+										//interactive
+										$query_select_present= "SELECT title FROM tbl_courses WHERE id=".$interactive_id[$i];
+										$result_select_present = $connection->query($query_select_present);
+
+										while($row2 = $result_select_present->fetch_array()){
+
+											if($count_pres==1)
+											{
+												echo "<li class=\"active\"><a href=\"#_page_".$count_pres."\" data-toggle=\"tab\" >Part - ".$count_pres."9999</a></li>";
+											}
+											else
+											{
+												echo "<li><a href=\"#_page_".$count_pres."\" data-toggle=\"tab\">Part - ".$count_pres."</a></li>";
+											}
+
+										}
+									}
+
+									$count_pres++;
+								}
+								echo "</ul>";
+								echo "</div>";
+								echo "</div>";
+
+								echo '<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 coursecontent" >';
+								echo "<div id=\"myTabContent\" class=\"tab-content\" style=\"margin-left:20px;\">";
+
+								//$count_pres=0;
+								//printCoursePart($connection, $_GET['course_id'] , "section", $count_pres);  //printModule Content in first tab
+								$count_pres=1;
+
+								for($i=0; $i<$count_list;$i++)
+								{
+									if($presentation_id[$i]>0 && $interactive_id[$i]==0)
+									{
+										printCoursePart($connection, $presentation_id[$i], "section", $count_pres,$url_iframe);
+
+
+									}
+									else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
+									{
+										printCoursePart($connection, $interactive_id[$i], "section", $count_pres,$url_iframe);
+									}
+
+									$count_pres++;
+								}
+
+								echo "</div>";
+								echo "</div>";
+								echo "</div>";
+								echo "</div>";
+			}
+			else {
 			if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
 				{
 					?>
@@ -638,6 +728,7 @@
 				}
 				echo "</span>";
 			}
+		}
 		}
 
 
@@ -938,10 +1029,12 @@ function printTitleAndHintInfo($hintTitle, $coursetitle, $author, $publisher, $c
 					' <br/> Target Name : '.$targetName.
 					' <br/> Target Description : '.$targetDescription;
 
-	echo "<h2>".$coursetitle;
+
+
+	echo "<h1 style=\"text-align:center;\">".$coursetitle."</h1>";
 	/*echo '<a href="#" data-hint-mode="2" data-hint="'.$hintTitle.' | '.$hintinfo.'" data-hint-position="bottom"><small style="padding-left: 5px;"><i class="fa fa-info-circle"></i></small></a>';*/
-	echo '<a href="#" id="lrmi_popup" class="btn" data-toggle="popover" rel="popover" data-content="'.$hintinfo.'" data-original-title="'.$hintTitle.'"><i class="fa fa-info-circle fa-2x"></i></a>';
-	echo "</h2>";
+	//echo '<a href="#" id="lrmi_popup" class="btn" data-toggle="popover" rel="popover" data-content="'.$hintinfo.'" data-original-title="'.$hintTitle.'"><i class="fa fa-info-circle fa-2x"></i></a>';
+
 
 }
 
