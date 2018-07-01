@@ -205,7 +205,7 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 		<!-- <div class="container" >-->
 
 
-			<div class="navbar navbar-forgebox navbar-static-top" role="navigation">
+			<div class="navbar navbar-forgebox navbar-static-top" role="navigation" style="border-bottom:1px solid #c7c7c7;">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -489,4 +489,5 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 			</div>
 	</section>
 	<!--  End Header -->
-   <div class="container" >  <!-- This div should close on footer.php -->
+  <div style="background-color:#efefef;">
+   <div class="container" >  <!-- This div should close on footer.php  - ti exeis akousei apopse Bakoulias gi auto -->

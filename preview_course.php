@@ -318,20 +318,20 @@
         );*/
 	</script>
 
+
 <div id="CourseContentRow" class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div itemscope="" itemtype="http://schema.org/CreativeWork" >
-		<div id="FORGETitleWindow" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-			<h1>
-				<a href="all_course.php" style="text-decoration:none;">
-					<span class="fa fa-arrow-circle-o-left fa-sm black"></span>
-				  <span  style="color:black;">View all Courses</span>
-					</a>
-			</h1>
 
-		</div>
+
+		<?php
+		echo "<div style=\"text-align:center; border-bottom:3px solid #ff4400; font-size:50px; font-weight:bold; color:#000000; margin-top:20px;\">";
+		echo 	"<div style=\"max-width:100%;\">".$title_course."</div>";
+		echo "</div>";
+
+		 ?>
 
 		<!-- ***** Start Rating ***** -->
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-top: 50px;">
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 pull-right" style="margin-top:5px;">
 		<?php
 
 			$avg_rate=0;
@@ -463,12 +463,14 @@
 		if($count_list>0)
 		{
 		?>
-			<div id="CourseViewMenu"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="row" style="margin:5px;">
-						<a class="btn btn-primary btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=full">Full Height</a>&nbsp;|&nbsp;
-						<a class="btn btn-primary btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>&nbsp;
-				</div>
+		<div class=container style="margin:5px 0px 30px 0px;">
+			<div id="CourseViewMenu"  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=full">Full Height</a>&nbsp;|&nbsp;
+						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>&nbsp;
+
 			</div>
+		</div>
 		<?php
 		}
 		?>
@@ -488,17 +490,14 @@
 				if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
 				{
 					?>
-					<div class="row" style="float:right; font-size:20px; padding-right:15px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
+					<div class="row" style="font-size:20px; padding-right:15px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
 					<?php
 				}
 				echo '<div class="row">';
 
 
-				echo "<div style=\"text-align:center;\"><h1>";
-				printCoursePart($connection, $_GET['course_id'],"",0,$url_iframe);
-			  echo "</h1></div>";
 
-				echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="border-right:1px solid #000000; padding-right:0px;" >';
+				echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left:5px; padding-right:10px;">';
 				echo "<div class=\"tab-control\" data-role=\"tab-control\">";
 				echo "<ul id=\"myTab\" class=\"nav coursesections flex nav-pills nav-stacked\" >";
 				//$count_pres=0;
@@ -520,6 +519,7 @@
 							}
 							else
 							{
+								echo '<div style ="position:absolute; margin-left:45%; background-color:black; margin-top:-20px; height:40px;"> a </div>';
 								echo '<li><a href="#_page_'.$count_pres.'" data-toggle="tab">'.$row[title].'</a></li>';
 							}
 
@@ -589,7 +589,7 @@
 						<div class="row" style="float:right; font-size:20px; padding-right:35px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
 						<?php
 					}
-				printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
+			//	printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
 
 				for($i=0; $i<$count_list;$i++)
 				{
@@ -609,7 +609,7 @@
 	}
 		else
 		{
-			if ($count_list>0) // the stupidity of my code is unprecedented 
+			if ($count_list>0) // the stupidity of my code is unprecedented
 			{
 								if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
 								{
@@ -620,11 +620,8 @@
 								echo '<div class="row">';
 
 
-								echo "<div style=\"text-align:center;\"><h1>";
-								printCoursePart($connection, $_GET['course_id'],"",0,$url_iframe);
-							  echo "</h1></div>";
 
-								echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="border-right:1px solid #000000; padding-right:0px;" >';
+								echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left:5px; padding-right:10px;">';
 								echo "<div class=\"tab-control\" data-role=\"tab-control\">";
 								echo "<ul id=\"myTab\" class=\"nav coursesections flex nav-pills nav-stacked\" >";
 								//$count_pres=0;
@@ -646,6 +643,7 @@
 											}
 											else
 											{
+						        		echo '<div style ="position:absolute; margin-left:45%; background-color:black; margin-top:-20px; height:40px;"> a </div>';
 												echo '<li><a href="#_page_'.$count_pres.'" data-toggle="tab">'.$row[title].'</a></li>';
 											}
 
@@ -713,7 +711,7 @@
 					<div class="row" style="float:right; font-size:20px; padding-right:35px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
 					<?php
 				}
-			printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
+			//printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
 
 			for($i=0; $i<$count_list;$i++)
 			{
@@ -886,7 +884,7 @@
 		<div id="disqus_thread"></div>
 			<script type="text/javascript">
 				/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-				var disqus_shortname = 'forgeboxeu'; // required: replace example with your forum shortname
+				var disqus_shortname = 'securityaware-dotme'; // required: replace example with your forum shortname
 
 				/* * * DON'T EDIT BELOW THIS LINE * * */
 				(function() {

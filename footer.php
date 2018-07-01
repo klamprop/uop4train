@@ -2,7 +2,7 @@
     <!--  ------------------------   /#footer      ------------------------      -->
 
 
-
+	</div>	<!-- ti exeis akousei apopse Bakoulias-->
 	</div>	<!-- this is the container div from header-->
 		<footer id="footer">
 
@@ -109,7 +109,8 @@
 
 			</script>
 
-			<section style="background-color:#f8f8f8; border-top:1px solid #e7e7e7;">
+
+			<section style="background-color:#f8f8f8; border-top:1px solid #c7c7c7;">
 				<div class="container">
 					<div class="row">
 							<div class="col-sm-12">

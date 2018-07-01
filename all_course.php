@@ -177,7 +177,7 @@ function printCoursesTeaser($connection, $query_select_courses){
    echo '<p style="color:#636365">'.$row['sdescription'].'</p>';
    echo '</div>';
 
-   echo '<a style="bottom: 0; margin: 15px; border-style: solid; border-width: 1px;padding: 10px; background-color: #525789; text-decoration: none; text-align: center; color:white; right: 15px; position: absolute; left: 15px;" href="preview_course.php?course_id='  .$row['id'].  '">View course</a>';
+   echo '<a style="bottom: 0; margin: 15px; border-style: solid; border-width: 1px;padding: 10px; border-radius:5px; background-color: #525789; text-decoration: none; text-align: center; color:white; right: 15px; position: absolute; left: 15px;" href="preview_course.php?course_id='  .$row['id'].  '">View course</a>';
    echo '</div>';
    echo '</div>';
 
