@@ -590,7 +590,7 @@
 						<?php
 					}
 			//	printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
-
+			echo "<div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12 coursecontent\">";
 				for($i=0; $i<$count_list;$i++)
 				{
 					echo "<span itemprop=\"citation\">";
@@ -603,8 +603,11 @@
 						printCoursePart($connection, $interactive_id[$i],"","",$url_iframe);
 					}
 					echo "</span>";
+
 				}
+			echo "</div>";
 			}
+
 		}
 	}
 		else
@@ -700,9 +703,9 @@
 								}
 
 								echo "</div>";
-								echo "</div>";
-								echo "</div>";
-								echo "</div>";
+							echo "</div>";
+						echo "</div>";
+					echo "</div>";
 			}
 			else {
 			if(isset($_GET["noheaders"]) && $_GET["noheaders"]==1)
@@ -711,7 +714,10 @@
 					<div class="row" style="float:right; font-size:20px; padding-right:35px;"><a href="preview_course.php?course_id=<?php echo $_GET['course_id']; if(isset($_GET['preview'])){ if($_GET['preview']=="twocol"){echo "&preview=twocol";}if($_GET['preview']=="section"){echo "&preview=section";}} ?>" onclick=""><i class="glyphicon glyphicon-resize-small"></i></a></div>
 					<?php
 				}
-			//printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
+
+			echo '<div class="echo col-xs-12 col-sm-12 col-md-12 col-lg-12 coursecontent">';
+			printCoursePart($connection, $_GET['course_id'],"","",$url_iframe);
+  		echo '</div>';
 
 			for($i=0; $i<$count_list;$i++)
 			{
