@@ -10,21 +10,22 @@ if(!isset($_SESSION["UROLE_ID"]) OR ($_SESSION["UROLE_ID"]==7)) {
 }
 ?>
 
+<div style="height:20px; background-color:#ffffff;"></div>
 <div style="background: url('images/training.png'); background-repeat:no-repeat; background-size: cover; background-color:black;" >
 <section id="headermain">
 	<div class="container">
 		<div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 
 			<div class="col-sm-5 col-md-5 col-lg-5 pull-right" style="background-color:#000000;">
-			<h1 style="color:#ffffff; font-size:35px; text-align:center;">Cybersecurity training for all!</h1>
-			<p style="color:#ffffff; margin-top:30px; text-align:center;">FREE access to interactive courses on real systems and resources from security experts, companies, organizations and institutes!
+			<h1 style="color:#ffffff; font-size:40px; margin-top: 60px; text-align:center;">Cybersecurity training</h1>
+			<h1 style="color:#ffffff; font-size:40px; text-align:center;">[.for you]</h1>
+			<p style="color:#ffffff; margin-top:60px; text-align:center;">FREE access to interactive courses on real systems and resources from security experts, companies, organizations and institutes!
 			</p>
 
-			<div class="input-group" style="padding:100px 0px 100px 0px">
-					<input type="text" class="form-control" name="x" style="border-color:#000000;" placeholder="Search for a course or topic...">
-					<span class="input-group-btn">
-							<button class="btn btn-default" type="button" style="background-color:#ff4500; color:#000000; font-weight:bold; border-color:#ff4500	; padding-left:25px; padding-right:25px;">Go!</button>
-					</span>
+
+
+			<div style="padding:50px 0px 80px 0px; text-align:center;">
+				<button onclick="location.href='all_course.php'" class="btn btn-default" type="button" style="background-color:green; color:#ffffff; font-size: 25px; border-color:#000000; padding:15px 55px 15px 55px; border-radius:5px;">Start here</button>
 			</div>
 
 			</div>

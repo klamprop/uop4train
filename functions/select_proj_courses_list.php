@@ -9,7 +9,8 @@
 
 		$result_select_project = $connection->query($query_select_project);
 		$i_project=0;
-		$data_table_project='<div id="test-list"><div class="row"><div"><input type="text" class="form-control search" placeholder="Search by Project Name" /></div></div><table class="table" ><tbody class="list">';
+		$data_table_project='<div id="test-list"><div class="row"><div"><input type="text" class="form-control search" style="border-radius:1px;" placeholder="Search by Project Name" /></div></div><table class="table" ><tbody class="list">';
+		$data_table_project.="<tr><td class=\"name\" style=\"border:none;\"><a href=\"all_course.php\">All projects</a></td></tr>";
 		while($row = $result_select_project->fetch_row()){
 			 $id = $row[0];
 			 $name = $row[1];

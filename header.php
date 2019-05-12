@@ -194,18 +194,18 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 	<section id="FORGEBoxHeaderMenuLogo" style="background-color:#ffffff" >
 		<div class="container" >
 
-		<nav class="row navigation-bar dark" style="height:60px">
-			<nav class="navbar-content">
-				<a href="index.php" class="element" style="font-weight:bold; text-decoration: none; margin-left: 40%; color:#000000;"><img src="images/logoTBD.png" style="height:50px; margin-top: 5px;"/>Security Aware [dot_me]</a>
+		<nav class="row navigation-bar dark" style="height:5px;">
+			<nav class="navbar-content" style=" margin-top:10px;">
+				<a href="index.php" class="element" style="font-weight:bold; text-decoration: none; margin-left:40%; color:#000000;"><img src="images/logoTBD.png" style="height:45px;"/>Security Aware [.me]</a>
 			</nav>
 		</nav>
 		</div>
 	</section>
-	<section id="FORGEBoxHeaderMenu" >
+	<section id="FORGEBoxHeaderMenu" style=" border-bottom:1px solid #c7c7c7;" >
 		<!-- <div class="container" >-->
 
 
-			<div class="navbar navbar-forgebox navbar-static-top" role="navigation" style="border-bottom:1px solid #c7c7c7;">
+			<div class="navbar navbar-forgebox navbar-static-top" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -222,8 +222,10 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 							{
 						?>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold; text-decoration:none; color:#000000;"><img src="images/logoTBD.png" style="height:40px;"/><span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
+                  <li><a href="index.php">Home</a></li>
+                  <li class="divider"></li>
 								<?php
 									if(accessRole("VIEW_ALL_COURSES",$connection))
 									{
@@ -424,7 +426,7 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 						?>
 						<ul class="nav navbar-nav navbar-right nav-forgebox">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px;">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<?php
 									$query_select_av = "SELECT avatar_name FROM tbl_users WHERE active_user=1 AND id_user=".$_SESSION["USERID"];
 									$result_select_av = $connection->query($query_select_av);
@@ -489,5 +491,5 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 			</div>
 	</section>
 	<!--  End Header -->
-  <div style="background-color:#efefef;">
+  <div style="background-color:#F6F8F3;">
    <div class="container" >  <!-- This div should close on footer.php  - ti exeis akousei apopse Bakoulias gi auto -->

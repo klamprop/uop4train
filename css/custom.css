@@ -30,7 +30,11 @@ Start
   src: local("Segoe UI Bold"), local("Open Sans Bold"), local("OpenSans-Bold"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzJ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
 }*/
 
-body{font-family:"Open Sans", Helvetica,Arial,sans-serif;}
+/*body{font-family:"Open Sans", Helvetica,Arial,sans-serif;}*/
+body{
+	font-family: 'Roboto', sans-serif;
+
+}
 
 
 p,ul,li{
@@ -48,9 +52,10 @@ h2 {
 
 .navbar-forgebox {
 	background-color: #ffffff;
-	border-color: #efefef;
 	color:#ffffff;
+	margin-top: 0px;
 	margin-bottom: 0px;
+	height:40px;
 }
 .navbar-forgebox .navbar-brand {
 	color: #edf1fc;
@@ -63,28 +68,29 @@ h2 {
 	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
 }
 .navbar-forgebox .navbar-nav > li > a {
-	color: #000000;
+	color: #0E80A0;
+  padding: 5px 10px 4px 10px;
 	}
 .navbar-forgebox .navbar-nav > li > a:hover {
 	color: #666666;
-	background: #efefef;
+	background: #F6F8F3;
 }
 	} .navbar-forgebox .navbar-nav > li > a:focus {
 	color: #666666;
 }
 .navbar-forgebox .navbar-nav > .active > a, .navbar-forgebox .navbar-nav > .active > a:hover, .navbar-forgebox .navbar-nav > .active > a:focus {
 	color: #f5ecff;
-	background-color: #000000;
+	background-color: #ffffff;
 }
 .navbar-forgebox .navbar-nav > .open > a, .navbar-forgebox .navbar-nav > .open > a:hover, .navbar-forgebox .navbar-nav > .open > a:focus {
 	color: #f5ecff;
-	background-color: #000000;
+	background-color: #ffffff;
 }
 .navbar-forgebox .navbar-toggle {
 	border-color: #000000;
 }
 .navbar-forgebox .navbar-toggle:hover, .navbar-forgebox .navbar-toggle:focus {
-	background-color: #000000;
+	background-color: #ffffff;
 }
 .navbar-forgebox .navbar-toggle .icon-bar {
 	background-color: #edf1fc;
@@ -106,6 +112,7 @@ h2 {
 
 .nav > li > a:hover{
 	background-color: #ffffff;
+	    text-decoration: none;
 }
 
 
@@ -152,7 +159,7 @@ h2 {
 	text-align: center;
 	background-color: #ffffff;
 	color:#c7c7c7;
-	border-radius: 5px;
+	border-radius: 1px;
 	border:1px solid #c7c7c7;
 }
 
@@ -168,17 +175,18 @@ h2 {
 
 .coursesections > li.active > a, .coursesections > li.active >a:focus, .coursesections > li.active >a:hover  {
 	text-align: center;
-	background-color: #525789;
+	background-color: #4682B4;
 	color:#ffffff;
-	border-radius: 5px;
+	border-radius: 1px;
 	border:none;
 }
 
 .coursecontent {
 	background-color: #ffffff;
 	border:1px solid #c7c7c7;
-	border-radius: 5px;
+	border-radius: 1px;
 	word-wrap: break-word;
+
 	}
 
 /*

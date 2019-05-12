@@ -36,15 +36,15 @@
 	<div class="container" >
 		<div class="row"  >
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-top:20px;padding-bottom:50px">
-      <h2 style="color:#636365" ><b>Categories</b></h2>
+      <h2 style="color:#000000; margin-bottom:15px;" ><b>Categories</b></h2>
         <div id="table_cat">
         </div>
-      <h2 style="color:#636365" ><b>Projects</b></h2>
+      <h2 style="color:#000000; margin-bottom:15px;" ><b>Projects</b></h2>
         <div id="table_prj">
         </div>
       </div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="padding-top:20px;padding-bottom:50px">
-			     <h2 style="color:#636365" ><b>List of courses</b></h2>
+			     <h2 style="color:#000000; margin-left:5px;" ><b>List of courses</b></h2>
            <?php
 	          if(isset($_GET['project_id']))
             {
@@ -92,7 +92,7 @@
 
  //Shows only latest public Course Modules
  function printTeaserPublicCourses($connection){
- $query_select_courses= "SELECT * FROM tbl_courses WHERE publish_to_anonymous=1  AND course_item_id=1 AND active=1 order by modify_date DESC LIMIT 12";
+ $query_select_courses= "SELECT * FROM tbl_courses WHERE publish_to_anonymous=1  AND course_item_id=1 AND active=1 order by modify_date DESC LIMIT 40";
  printCoursesTeaser($connection, $query_select_courses);
 
 }
@@ -142,19 +142,22 @@ function printCoursesTeaser($connection, $query_select_courses){
    /* **** End Rating *** */
 
 
-   echo '<div class="col-sm-8 col-md-4" style="padding:0px 5px 0px 5px; margin-top:10px;">';
-   echo '<div  style="border: #cecece; background-color: white;border-width: 1px; border-style: solid; padding: 5px; /*text-align: center;*/;border-radius: 5px;box-shadow: 1px 1px 3px #a0a0a0;">';
-   echo '<div  style="height:300px;">';
-   echo '<div id="courseHeaderTitle" style="height:150px;margin-bottom:10px;border-bottom: 1px dotted rgb(222, 197, 197);">';
-   echo '<table><tr>';
-   echo '<td width="50px" style="vertical-align: top;"><img style="margin-top: 5px;" src="images/course_smallico.PNG"></td>';
-   echo '<td style="vertical-align: top;"><a href="preview_course.php?course_id='  .$row['id'].  '"><h3 style="color:#525789; margin-top:7px; margin-left:2px; font-size:19px;">'.$row['title'].'</h3></a>';
-   echo '<tr><td colspan="2"><p style="color:#0B0F39;margin-top:10px;" >by '.$row['publisher'].'</p></td></tr>';
+   echo '<div class="col-sm-8 col-md-4" style="padding:0px 5px 0px 5px; margin-top:5px;">';
+   echo '<div  style="border: #cfcfcf; background-color: white;border-width: 1px; border-style: solid; padding: 5px; /*text-align: center;border-radius: 5px;box-shadow: 1px 1px 3px #a0a0a0;*/">';
+   echo '<div  style="height:240px;">';
+   echo '<div id="courseHeaderTitle" style="height:160px; margin-bottom:10px;border-bottom: 1px dotted rgb(222, 197, 197);">';
+   echo '<table style="width:100%;height:130px;"><tr>';
+/*   echo '<td width="50px" style="vertical-align: top;"><img style="margin-top: 5px;" src="images/course_smallico.PNG"></td>';*/
+   echo '<td style="vertical-align:top;"><a style="text-decoration: none;" href="preview_course.php?course_id='  .$row['id'].  '"><h3 style="color:#000000; margin:20px 10px 5px 10px; font-size:25px;">'.$row['title'].'</h3></a>';
+   echo '<p style="color:#777777; margin-left:10px; font-size:15px;" >by '.$row['publisher'].'</p>';
    echo '</td>';
    echo '</tr>';
+   echo '</table>';
 
+   echo '<table style="width:100%;">';
 
    /* **** Start Rating *** */
+
    if($avg_rate!='N/A'){
      if($avg_rate>0 && $avg_rate<1){echo '<tr><td colspan="2"><p style="text-align:right;"><a href="" data-toggle="modal" data-target="#myModal_'.$row['id'].'" style="color: #BDBD12 !important;"><i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </p></td></tr></table>';}
      else if($avg_rate===1){echo '<tr><td colspan="2"><p style="text-align:right;"><a href="" data-toggle="modal" data-target="#myModal_'.$row['id'].'" style="color: #BDBD12 !important;"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;<i class="fa fa-info" aria-hidden="true"></i></a> </p></td></tr></table>';}
@@ -170,6 +173,7 @@ function printCoursesTeaser($connection, $query_select_courses){
    }else{
      echo '<tr><td colspan="2"><p style="text-align:right;"><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></p></td></tr></table>';
    }
+
    /* **** End Rating *** */
 
 
@@ -177,7 +181,7 @@ function printCoursesTeaser($connection, $query_select_courses){
    echo '<p style="color:#636365">'.$row['sdescription'].'</p>';
    echo '</div>';
 
-   echo '<a style="bottom: 0; margin: 15px; border-style: solid; border-width: 1px;padding: 10px; border-radius:5px; background-color: #525789; text-decoration: none; text-align: center; color:white; right: 15px; position: absolute; left: 15px;" href="preview_course.php?course_id='  .$row['id'].  '">View course</a>';
+   echo '<a style="bottom:0; margin: 25px; padding: 10px; background-color: #4682B4; text-decoration: none; text-align: center; color:white; right: 15px; position: absolute; left: 15px;" href="preview_course.php?course_id='  .$row['id'].  '">View course</a>';
    echo '</div>';
    echo '</div>';
 

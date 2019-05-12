@@ -9,7 +9,8 @@
 
 		$result_select_category = $connection->query($query_select_category);
 		$i_category=0;
-		$data_table_category='<div id="test-list"><div class="row"><div"><input type="text" class="form-control search" placeholder="Search by Category Name" /></div></div><table class="table" ><tbody class="list">';
+		$data_table_category='<div id="test-list"><div class="row"><div"><input type="text" class="form-control search" style="border-radius:1px;" placeholder="Search by Category Name" /></div></div><table class="table" ><tbody class="list">';
+		$data_table_category.="<tr><td class=\"name\" style=\"border:none;\"><a href=\"all_course.php\">All categories</a></td></tr>";
 		while($row = $result_select_category->fetch_row()){
 			 $id = $row[0];
 			 $name = $row[1];
@@ -18,7 +19,8 @@
 			} else if($row[2]==1){
 			$active_cat = "fa fa-check-square-o";
 			}
-			$data_table_category.="<tr><td class=\"name\" style=\"border:none;\">".$row[1]."</td></tr>";
+			$data_table_category.="<tr><td class=\"name\" style=\"border:none; font-weight:bold;\"><a style=\"color:#000000;\" href=\"all_course.php?course_category_id=".$row[0]." \">".$row[1]."</a></td></tr>";
+
 		/*	if(accessRole("NEW_EDIT_DELETE_CATEGORY_COURSE",$connection))
 			{
 			$data_table_category.="<i class=\"fa fa-pencil\"></i></a></td><td style=\"\" class=\"right\"><a href=\"#\" onclick=\"activate_category(".$row[0]."); return false;\"><i id=\"category".$row[0]."\" class=\"".$active_cat."\"></i></a></td></tr>";

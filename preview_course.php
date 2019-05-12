@@ -324,7 +324,7 @@
 
 
 		<?php
-		echo "<div style=\"text-align:center; border-bottom:3px solid #ff4400; font-size:50px; font-weight:bold; color:#000000; margin-top:20px;\">";
+		echo "<div style=\"text-align:center; border-bottom:1px solid #4682B4; font-size:50px; font-weight:bold; color:#000000; margin-top:20px;\">";
 		echo 	"<div style=\"max-width:100%;\">".$title_course."</div>";
 		echo "</div>";
 
@@ -466,8 +466,8 @@
 		<div class=container style="margin:5px 0px 30px 0px;">
 			<div id="CourseViewMenu"  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
-						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=full">Full Height</a>&nbsp;|&nbsp;
-						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>&nbsp;
+						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=full">Full Height</a>&nbsp;&nbsp;
+						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Sections</a>&nbsp;
 
 			</div>
 		</div>
@@ -742,21 +742,21 @@
 </div><!--  ------------------------  END CONTENT      ------------------------      -->
 
 
-<div class="row">
+<div class="row" style="margin-top:15px;">
 	<div class="container">
 		<!-- AddToAny BEGIN -->
 		<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
 			<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
 			<a class="a2a_button_facebook"></a>
 			<a class="a2a_button_twitter"></a>
-			<a class="a2a_button_google_plus"></a>
+			<a class="a2a_button_linkedin"></a>
 		</div>
 		<script async src="https://static.addtoany.com/menu/page.js"></script>
 		<!-- AddToAny END -->
 	</div>
 </div>
 
-<div class="row" style="padding-top:20px; padding-bottom:20px;">
+<div class="row" style="padding-top:10px; padding-bottom:10px;">
 	<div class="container">
 		<main class="o-content">
 			<div class="">
@@ -808,7 +808,7 @@
 				var shopItem = document.createElement('div');
 
 				var html = '<div class="c-shop-item__details">' +
-					'<h3 class="c-shop-item__title">' + data.title + '</h3>' +
+					'<h2 class="c-shop-item__title"><b>' + data.title + '</b></h2>' +
 					'<p class="c-shop-item__description">' + data.description + '</p>' +
 					'<ul class="c-rating"></ul>' +
 					'</div>';
