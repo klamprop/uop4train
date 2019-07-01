@@ -19,7 +19,9 @@
 			} else if($row[2]==1){
 			$active_cat = "fa fa-check-square-o";
 			}
-			$data_table_category.="<tr><td class=\"name\" style=\"border:none; font-weight:bold;\"><a style=\"color:#000000;\" href=\"all_course.php?course_category_id=".$row[0]." \">".$row[1]."</a></td></tr>";
+//		FOR SMESEC ADJUSTMENT - 	$data_table_category.="<tr><td class=\"name\" style=\"border:none; font-weight:bold;\"><a style=\"color:#000000;\" href=\"all_course.php?course_category_id=".$row[0]." \">".$row[1]."</a></td></tr>";
+			$data_table_category.="<tr><td class=\"name\" style=\"border:none; font-weight:bold;\"><a style=\"color:#000000;\" href=\"#\" \">".$row[1]."</a></td></tr>";
+
 
 		/*	if(accessRole("NEW_EDIT_DELETE_CATEGORY_COURSE",$connection))
 			{
