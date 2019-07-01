@@ -37,6 +37,7 @@ body{
 }
 
 
+
 p,ul,li{
 	font-size:16px;
 }
@@ -188,6 +189,98 @@ h2 {
 	word-wrap: break-word;
 
 	}
+
+
+.btn-default, .btn-smesec,
+.btn-smesec-dark, .btn-smesec-light {
+    margin: 24px 12px;
+}
+
+.btn-left {
+    margin: 24px 12px 24px 0px;
+}
+
+.btn-smesec, .btn-smesec-dark, .btn-smesec-light, .btn-primary {
+    font-family: 'Miriam Libre';
+    font-weight: normal;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0;
+    padding: 11px 24px 8px;
+    transition: all 0.3s ease 0s;
+}
+
+.btn-smesec {
+    color: #007EA7;
+    border: 1px solid #007EA7;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #007EA7;
+    border: 1px solid #007EA7;
+}
+
+.btn-smesec-light {
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+.btn-smesec-dark {
+    color: #ffffff;
+    background-color: #001921;
+    border: 1px solid #001921;
+}
+
+.btn-smesec:hover, .btn-smesec:focus, .btn-smesec:active, .btn-smesec.active {
+    color: #ffffff;
+    background-color: #007EA7;
+    border-color: #007EA7;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    color: #007EA7;
+    background-color: transparent;
+    border-color: #007EA7;
+}
+
+.btn-smesec-light:hover, .btn-smesec-light:focus, .btn-smesec-light:active, .btn-smesec-light.active {
+    color: #FFFFFF;
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+.btn-smesec-dark:hover, .btn-smesec-dark:focus, .btn-smesec-dark:active, .btn-smesec-dark.active {
+    color: #001921;
+    background-color: transparent;
+    border-color: #001921;
+}
+
+.btn a, .btn-smesec a, .btn-smesec-dark a, .btn-smesec-light a   {
+    font-size: 0.9em;
+}
+
+.btn a, .btn-smesec a  {
+    color: #007EA7;
+}
+
+.btn-smesec-dark a {
+    color: #C8FA96;
+}
+
+.btn-smesec:hover a, .btn-smesec a:hover {
+    color: #FFFFFF;
+}
+
+.btn-smesec-light:hover a, .btn-smesec-light a:hover {
+    color: #FFFFFF;
+}
+
+.btn-smesec-dark:hover a, .btn-smesec-dark a:hover {
+    color: #001921;
+}
+
 
 /*
 @media (max-width: 767px) {

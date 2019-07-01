@@ -10,7 +10,7 @@
 		$result_select_category = $connection->query($query_select_category);
 		$i_category=0;
 		$data_table_category='<div id="test-list"><div class="row"><div"><input type="text" class="form-control search" style="border-radius:1px;" placeholder="Search by Category Name" /></div></div><table class="table" ><tbody class="list">';
-		$data_table_category.="<tr><td class=\"name\" style=\"border:none;\"><a href=\"all_course.php\">All categories</a></td></tr>";
+	//	$data_table_category.="<tr><td class=\"name\" style=\"border:none;\"><a href=\"all_course.php\">All categories</a></td></tr>";
 		while($row = $result_select_category->fetch_row()){
 			 $id = $row[0];
 			 $name = $row[1];

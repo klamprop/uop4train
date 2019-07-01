@@ -48,6 +48,11 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 
+  <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://indestructibletype-fonthosting.github.io/jost.css" type="text/css" charset="utf-8" />
+
+
 
 	<!-- New Header Bootstrap Start -->
 	<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -222,17 +227,33 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 							{
 						?>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold; text-decoration:none; color:#000000;"><img src="images/logoTBD.png" style="height:40px;"/><span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" style=" text-decoration:none; color:#000000;"><img src="images/logoTBD.png" style="height:40px;"/> Menu <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
+
+                <?php
+                if($_SESSION['UROLE_ID'] != 5){
+                ?>
                   <li><a href="index.php">Home</a></li>
                   <li class="divider"></li>
+
+                <?php
+                }
+                 ?>
+
 								<?php
 									if(accessRole("VIEW_ALL_COURSES",$connection))
 									{
+                    if($_SESSION['UROLE_ID'] == 5){
+                ?>
+                      <li>
+                      <a href="all_course_smesec.php">All SMESEC Courses</a></li>
+                <?php  } else {
 								?>
-									<li><a href="all_course.php">View available Courses</a></li>
+									<li>
+                    <a href="all_course.php">View available Courses</a></li>
 								<?php
-									}
+									     }
+                  }
 									if(accessRole("VIEW_MY_COURSES",$connection))
 									{
 								?>
