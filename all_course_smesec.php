@@ -146,8 +146,8 @@ function printCoursesTeaser($connection, $query_select_courses){
    echo '<div  style="vertical-align: top; position:absolute;"><img style="margin:15px 0 0 3px; width:45px;" src="images/trainingicon.PNG"></div>';
    echo '<div  style="height:160px; margin-left:45px;">';
    echo '<div id="courseHeaderTitle" style="height:160px; margin-bottom:10px;">';
-   echo '<table style="width:100%;height:130px;"><tr>';
-   echo '<td style="vertical-align:top;"><a style="text-decoration: none;" href="preview_course.php?course_id='  .$row['id'].  '"><h3 style="color:#000000;font-family:\'Miriam Libre\'; font-weight:bold; margin:20px 10px 5px 10px; font-size:25px;">'.$row['title'].'</h3></a>';
+   echo '<table style="width:100%;height:140px;"><tr>';
+   echo '<td style="vertical-align:top;"><a style="text-decoration: none;" href="preview_course.php?course_id='  .$row['id'].  '"><h3 style="color:#000000;font-family:\'Miriam Libre\'; font-weight:bold; margin:20px 10px 5px 10px; font-size:20px;">'.$row['title'].'</h3></a>';
    echo '<p style="color:#777777; margin-left:10px; font-family:\'Miriam Libre\'; font-size:15px;" >by '.$row['publisher'].'</p>';
    echo '</td>';
    echo '</tr>';
@@ -177,10 +177,10 @@ function printCoursesTeaser($connection, $query_select_courses){
 
 
    echo '</div>';//headerTitle
-  // echo '<p style="color:#636365">'.$row['sdescription'].'</p>';
+   echo '<p style="color:#fd5602; margin-top:-25px; padding-right:10px; font-size:85%; text-align:right;">'.$row['sdescription'].'</p>';
    echo '</div>';
 
-   echo '<div class="btn-smesec" style="text-align:center; margin:24px 5px;"><a style="text-decoration:none; font-size:120%;" href="preview_course.php?course_id='  .$row['id'].  '">View course</a></div>';
+   echo '<div class="btn-smesec" style="text-align:center; margin:24px 5px 15px 5px;"><a style="text-decoration:none; font-size:120%;" href="preview_course.php?course_id='  .$row['id'].  '">View course</a></div>';
 
    echo '</div>';
    echo '</div>';

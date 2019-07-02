@@ -64,7 +64,7 @@ $allClaims      = $idToken->getClaims();
 
 registerUser($connection, $email, $fname, $lname, "" );
 makeUserALoggedInUser($connection, $email);
-header('Location: all_course.php?project_id=2');
+header('Location: all_course_smesec.php');
 
 function registerUser($connection, $email, $fname, $lname, $picture){
 
