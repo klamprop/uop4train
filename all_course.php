@@ -49,7 +49,10 @@
 	          if(isset($_GET['project_id']))
             {
               printSMESECCourses($connection,$_GET['project_id']);
-            }else
+            }elseif(isset($_GET['course_category_id'])){
+              printCoursesPerCategory($connection,$_GET['course_category_id']);
+            }
+            else
            printTeaserPublicCourses($connection);
 
            ?>
@@ -119,6 +122,22 @@ function printTeaserSignUpCourses($connection){
   printCoursesTeaser($connection, $query_select_courses);
 
   }
+
+  function printCoursesPerCategory($connection, $course_category_id){
+    $query_select_courses = "SELECT tbl_courses.id, tbl_courses.title, tbl_courses.sdescription, tbl_courses.content, tbl_courses.course_item_id, tbl_courses.author, ";
+    $query_select_courses .= " tbl_courses.create_date, tbl_courses.modify_date, tbl_courses.publisher, tbl_courses.`language`, tbl_courses.about, tbl_courses.alignmentType, ";
+    $query_select_courses .= " tbl_courses.educationalFramework, tbl_courses.targetName, tbl_courses.targetDescription, tbl_courses.targetURL, tbl_courses.educationalUse, ";
+    $query_select_courses .= " tbl_courses.duration, tbl_courses.typicalAgeRange, tbl_courses.interactivityType, tbl_courses.learningResourseType, tbl_courses.licence, tbl_courses.isBasedOnURL, ";
+    $query_select_courses .= " tbl_courses.educationalRole, tbl_courses.audienceType, tbl_courses.active, tbl_courses.publish_to_anonymous, tbl_courses.category_id, tbl_courses.create_uid, ";
+    $query_select_courses .= " tbl_courses.interactive_category, tbl_courses.interactive_item, tbl_courses.interactive_url, tbl_courses.iframe_height, tbl_category_courses.`name` FROM ";
+    $query_select_courses .= " tbl_category_courses INNER JOIN tbl_match_course_category ON tbl_match_course_category.course_category_id = tbl_category_courses.id INNER JOIN tbl_courses ON tbl_match_course_category.course_id = tbl_courses.id WHERE ";
+    $query_select_courses .= " tbl_match_course_category.course_category_id = ".$course_category_id." AND tbl_courses.course_item_id = 1 ORDER BY tbl_courses.create_date DESC";
+    $result_select_courses = $connection->query($query_select_courses);
+  
+  
+    printCoursesTeaser($connection, $query_select_courses);
+  
+    }
 
 function printCoursesTeaser($connection, $query_select_courses){
  $result_select_course = $connection->query($query_select_courses)  or die("Error in query.." . mysqli_error($connection));

@@ -7,7 +7,7 @@
 <?php
 
 
-$query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FROM tbl_users WHERE active_user=1 AND id_user=".$_SESSION["USERID"];
+$query_select_user = "SELECT name_user, surname_user, email_user,company,avatar_name FROM tbl_users WHERE active_user=1 AND id_user=".$_SESSION["USERID"];
 	$result_select_user = $connection->query($query_select_user);
 	
 	while($row = $result_select_user->fetch_array())
@@ -15,7 +15,8 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 		$fname = $row[0];
 		$sname = $row[1];
 		$uemail = $row[2];
-		$avatar = $row[3];
+		$ucompany = $row[3];
+		$avatar = $row[4];
 	}
 ?>
 
@@ -57,7 +58,12 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 								<label for="email">E-mail</label>
 								<input type="email" id="email" placeholder="" class="form-control" value="<?php echo $uemail; ?>" name="email" />
 								<label for="email" class="error"></label>
-							</div>													
+							</div>								
+							<div class="input-control text size3">
+								<label for="company">Company</label>
+								<input type="company" id="company" placeholder="" class="form-control" value="<?php echo $ucompany; ?>" name="company" />
+							</div>					
+
 							<div class="input-control checkbox">
 								<label id="labelchk">
 									<input type="checkbox" id="agreeckbx" />
@@ -173,6 +179,7 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 				var errName=true;
 				var errSur=true;
 				var errMail=true;
+				var errCompany=true;
 				//First Name validator
 					var fn = document.forms["user_detail"]["firstname"].value;
 					if (fn == null || fn == "") {
@@ -223,7 +230,8 @@ $query_select_user = "SELECT name_user, surname_user, email_user, avatar_name FR
 						var fname = $('#firstname').val();
 						var lname = $('#lastname').val();
 						var email = $('#email').val();
-						var formData = "firstname="+fname+"&lastname="+lname+"&email="+email;
+						var company = $('#company').val();
+						var formData = "firstname="+fname+"&lastname="+lname+"&email="+email+"&company="+company;
 						
 					$.ajax({
 						type: "POST",

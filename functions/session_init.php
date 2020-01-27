@@ -6,6 +6,7 @@
         $_SESSION['EMAIL'] = "";
         $_SESSION['FNAME'] = "";
         $_SESSION['LNAME'] = "";
+        $_SESSION['COMPANY'] = "";
         $_SESSION['UROLE'] = "";
 
 
@@ -14,4 +15,5 @@
 
 
 ?>
+
 

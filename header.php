@@ -46,17 +46,17 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
     <meta name="author" content="NAM ECE UoP">
 	<!-- fonts -->
 
-	<link href='//fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" integrity="sha384-ReZvjBZStLn56vZk9YR6LDU/vczBOMX+dNMEg7N32DoVLgkXftMaANwbPECWTrZ3" crossorigin="anonymous"  type="text/css">
 
-  <link href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Miriam+Libre&display=swap" integrity="sha384-5qExnpUgT84bkiRQovygl/r+6UmynXY/pnyuYoopipX6sNo8+viTTyyx0dOvJRHn" crossorigin="anonymous">
+
+ 
 
   <link rel="stylesheet" href="https://indestructibletype-fonthosting.github.io/jost.css" type="text/css" charset="utf-8" />
 
+	<link rel="stylesheet" href="https://indestructibletype-fonthosting.github.io/jost.css"  type="text/css" charset="utf-8" integrity="sha384-/Pgr8H2CLH/u72C4N8szdEmExDuxHywgmmXspO/nFQk7BdPQ/ct2piBYWg3PNxff" crossorigin="anonymous">
 
-
-	<!-- New Header Bootstrap Start -->
-	<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+	
 	 <link href="css/font-awesome.css" rel="stylesheet">
 	<!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -85,7 +85,10 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
     <script src="js/prettify/prettify.js"></script>
 	-->
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" integrity="sha384-arH1uA5PLAeRKjGnbtLWJE0jM7h24iSP2roxuBnksKET0bXe6kn6KiH9V9d6S41t" crossorigin="anonymous"></script>
+
+
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/list.js"></script>
 	<script src="js/list.pagination.js"></script>
@@ -514,3 +517,4 @@ if($_SESSION['USERID']>0 && $_SESSION['UROLE_ID']!=7){
 	<!--  End Header -->
   <div style="background-color:#F6F8F3;">
    <div class="container" >  <!-- This div should close on footer.php  - ti exeis akousei apopse Bakoulias gi auto -->
+

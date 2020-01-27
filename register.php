@@ -1,4 +1,5 @@
-<?php include 'header.php'; ?>
+<?php include 'header.php';
+	  include "conf.php"; ?>
 
 <div id="registerlayer" class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 		<div id="FORGETitleWindow" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -29,6 +30,9 @@
 				</div><br />
 				<div class="input-control text">
 					<input type="text" value="" class="form-control" placeholder="input surname" name="lname" id="lname" />
+				</div><br />
+				<div class="input-control text">
+					<input type="text" value="" class="form-control" placeholder="Input company" name="company" id="company" />
 				</div><br />
 				<div class="input-control text">
 					<input type="text" value="" class="form-control" placeholder="input email" name="uemail" id="uemail" />
@@ -140,4 +144,5 @@
 			
 			
 <?php include "footer.php"; ?>
+
 

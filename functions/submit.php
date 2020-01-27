@@ -42,27 +42,8 @@
 		
 	if(($result->num_rows) == 0)
 	{	
-		$results_register_query = "INSERT INTO tbl_users (name_user, surname_user, email_user, password_user, active_user,register_date,last_login_date) VALUES ('".$_POST['fname']."', '".$_POST['lname']."','".$_POST['uemail']."',MD5('".$_POST['pass']."'),".$_POST["user_active"].",now(),now())";
-		$results_register = $connection->query($results_register_query);
-		
-	
-		$url_path="";
-		
-		$create_url_path = explode("/",$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"]);
-		for($i=0;$i<count($create_url_path)-2;$i++)
-		{
-			$url_path.=$create_url_path[$i];
-			if($i>=0 && $i<(count($create_url_path)-2))
-			{
-				$url_path.="/";
-			}
-			
-		}
-		
-		Send_registration_mail($InstallationSite,$url_path);
-		
-		die(msg(1,"registered"));
-		
+		$results_register_query = "INSERT INTO tbl_users (name_user, surname_user, email_user, password_user, active_user,company,register_date,last_login_date) VALUES ('".$_POST['fname']."', '".$_POST['lname']."','".$_POST['uemail']."',MD5('".$_POST['pass']."'),".$_POST["user_active"].",'".$_POST['ucompany']."',now(),now())";
+		$results_register = $connection->query($results_register_query);		
 	}
 	else
 	{

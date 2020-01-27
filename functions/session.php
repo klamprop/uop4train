@@ -18,7 +18,7 @@
 	if(!empty($_POST['username']) && !empty($_POST['password']))
 	{
 		
-		$Select_user_query="SELECT id_user,name_user,surname_user,email_user FROM tbl_users WHERE email_user='".addslashes($_POST['username'])."' AND  password_user=MD5('".addslashes($_POST['password'])."') AND active_user=1";		
+		$Select_user_query="SELECT id_user,name_user,surname_user,email_user,company FROM tbl_users WHERE email_user='".addslashes($_POST['username'])."' AND  password_user=MD5('".addslashes($_POST['password'])."') AND active_user=1";		
 		//$result = mysql_query($Select_user_query);
 		$result = $connection->query($Select_user_query);
 		
@@ -31,6 +31,7 @@
 				$_SESSION['AUTHENTICATION'] = true;
 				$_SESSION['USERID'] = $row[0];
 				$_SESSION['EMAIL'] = $row[3];
+				$_SESSION['COMPANY'] = $row[4];
 				$_SESSION['FNAME'] = $row[1];
 				$_SESSION['LNAME'] = $row[2];
 				
@@ -75,3 +76,4 @@
 	
 	
 ?>
+
