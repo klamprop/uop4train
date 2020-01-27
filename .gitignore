@@ -1,3 +1,15 @@
 functions/conf.php
 attachments/
 clientsmesec.php
+vendor/composer/
+vendor/guzzlehttp/
+vendor/lcobucci/
+vendor/league/
+vendor/paragonie/
+vendor/psr/
+vendor/ralouphie/
+vendor/steverhoades/
+vendor/autoload.php
+composer.json
+composer.lock
+keys/
