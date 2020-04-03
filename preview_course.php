@@ -2,6 +2,10 @@
 	include "header.php";
 	require_once 'functions/lti/blti.php';
 
+
+
+
+
 	if(!empty($_POST)){
 		$query_select_user = "SELECT count(id_user) FROM tbl_users WHERE email_user='".$_POST['lis_person_contact_email_primary']."'";
 		$result_select_user = $connection->query($query_select_user);
@@ -55,7 +59,9 @@
 	$query_select_lrs_teacher= "SELECT lrs_details.endpoint_url, lrs_details.username, lrs_details.password FROM lrs_details INNER JOIN match_course_lrs ON lrs_details.id = match_course_lrs.lrs_id  WHERE match_course_lrs.course_id = ".$_GET['course_id'];
 
 	$result_select_lrs_teacher = $connection->query($query_select_lrs_teacher);
-
+	
+	
+	
 	while($row = $result_select_lrs_teacher->fetch_array()){
 		$lrs_endpoint_teacher = $row[0];
 		$lrs_authUser_teacher = $row[1];
@@ -116,8 +122,36 @@
 			$interactive_id[$count_list]= $row1[2];
 
 			$count_list++;
+			
 		}
 
+		////Additions for matching course and user. Query that asks with having course id and user id . With an if we have a user
+		if ($_SESSION['USERID'] != null){
+			$query_match_course_user ="SELECT user_id, course_id, last_visited, total, courses_completed FROM tbl_match_course_user WHERE course_id=".$_GET['course_id']." AND user_id=".$_SESSION['USERID']."";
+			$result_match_course_user = $connection->query($query_match_course_user);
+			
+			
+
+			while($row3 = $result_match_course_user->fetch_array()){
+				$user_id_match=$row3[0];
+				$course_id_match=$row3[1];
+				$last_visited_match=$row3[2];
+				$total_match=$row3[3];
+				$courses_completed_match=$row3[4];
+				
+			}//We test if the user has ever signed in this course
+			
+			if($user_id_match == null){
+				
+				//If we had never signed in we have to add user,course,total_parts and last_visited =1 so we can create his record
+				$percentage = (1/$count_list)*100;
+				$query_insert_course_user_connection = "INSERT INTO tbl_match_course_user(user_id, course_id, last_visited, total, courses_completed, percentage ) VALUES (".$_SESSION['USERID'].",".$_GET['course_id'].",1,".$count_list.",'1',".$percentage.")";
+				$result_insert_course_user_connection = $connection->query($query_insert_course_user_connection);
+				
+			} 
+			
+			
+		}
 	}
 
 
@@ -324,7 +358,7 @@
 
 
 		<?php
-		echo "<div style=\"text-align:center; border-bottom:1px solid #4682B4; font-size:50px; font-weight:bold; color:#000000; margin-top:20px;\">";
+		echo "<div style=\"text-align:center; border-bottom:3px solid #ff4400; font-size:50px; font-weight:bold; color:#000000; margin-top:20px;\">";
 		echo 	"<div style=\"max-width:100%;\">".$title_course."</div>";
 		echo "</div>";
 
@@ -466,8 +500,8 @@
 		<div class=container style="margin:5px 0px 30px 0px;">
 			<div id="CourseViewMenu"  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
-						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=full">Full Height</a>&nbsp;&nbsp;
-						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Sections</a>&nbsp;
+						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=full">Full Height</a>&nbsp;|&nbsp;
+						<a class="btn btn-default btn-sm" href="preview_course.php?course_id=<?php echo $_GET['course_id']; ?>&preview=section">Parts</a>&nbsp;
 
 			</div>
 		</div>
@@ -514,13 +548,14 @@
 						while($row = $result_select_present->fetch_array()){
 							if($count_pres==1)
 							{
-								echo '<li class="active"><a href="#_page_'.$count_pres.'" data-toggle="tab" >'.$row[title].'</a></li>';
+								echo '<li class="active"><a href="#_page_'.$count_pres.'" data-sectionid="'.$count_pres.'" data-user_id="'.$_SESSION["USERID"].'" data-course_id="'.$_GET['course_id'].'" class="update_course_status" data-toggle="tab" >'.$row[title].'</a></li>';
+							
 
 							}
 							else
 							{
 								echo '<div style ="position:absolute; margin-left:45%; background-color:black; margin-top:-20px; height:40px;"> a </div>';
-								echo '<li><a href="#_page_'.$count_pres.'" data-toggle="tab">'.$row[title].'</a></li>';
+								echo '<li><a href="#_page_'.$count_pres.'" data-sectionid="'.$count_pres.'"  data-user_id="'.$_SESSION["USERID"].'" data-course_id="'.$_GET['course_id'].'" class="update_course_status" data-toggle="tab">'.$row[title].'</a></li>';
 							}
 
 						}
@@ -563,12 +598,14 @@
 				{
 					if($presentation_id[$i]>0 && $interactive_id[$i]==0)
 					{
+						
 						printCoursePart($connection, $presentation_id[$i], "section", $count_pres,$url_iframe);
-
+						
 
 					}
 					else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
 					{
+						
 						printCoursePart($connection, $interactive_id[$i], "section", $count_pres,$url_iframe);
 					}
 
@@ -641,13 +678,13 @@
 										while($row = $result_select_present->fetch_array()){
 											if($count_pres==1)
 											{
-												echo '<li class="active"><a href="#_page_'.$count_pres.'" data-toggle="tab" >'.$row[title].'</a></li>';
+												echo '<li class="active"><a href="#_page_'.$count_pres.'" data-sectionid="'.$count_pres.'" data-user_id="'.$_SESSION["USERID"].'" data-course_id="'.$_GET['course_id'].'" class="update_course_status"  data-toggle="tab" >'.$row[title].'</a></li>';
 
 											}
 											else
 											{
 						        		echo '<div style ="position:absolute; margin-left:45%; background-color:black; margin-top:-20px; height:40px;"> a </div>';
-												echo '<li><a href="#_page_'.$count_pres.'" data-toggle="tab">'.$row[title].'</a></li>';
+												echo '<li><a href="#_page_'.$count_pres.'" data-sectionid="'.$count_pres.'" data-user_id="'.$_SESSION["USERID"].'" data-course_id="'.$_GET['course_id'].'" class="update_course_status"  data-toggle="tab">'.$row[title].'</a></li>';
 											}
 
 										}
@@ -685,17 +722,19 @@
 								//$count_pres=0;
 								//printCoursePart($connection, $_GET['course_id'] , "section", $count_pres);  //printModule Content in first tab
 								$count_pres=1;
-
+								
 								for($i=0; $i<$count_list;$i++)
 								{
 									if($presentation_id[$i]>0 && $interactive_id[$i]==0)
 									{
+										
 										printCoursePart($connection, $presentation_id[$i], "section", $count_pres,$url_iframe);
 
 
 									}
 									else if($presentation_id[$i]==0 && $interactive_id[$i]>0)
 									{
+										
 										printCoursePart($connection, $interactive_id[$i], "section", $count_pres,$url_iframe);
 									}
 
@@ -734,6 +773,10 @@
 			}
 		}
 		}
+		
+
+
+
 
 
 
@@ -742,21 +785,21 @@
 </div><!--  ------------------------  END CONTENT      ------------------------      -->
 
 
-<div class="row" style="margin-top:15px;">
+<div class="row">
 	<div class="container">
 		<!-- AddToAny BEGIN -->
 		<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
 			<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
 			<a class="a2a_button_facebook"></a>
 			<a class="a2a_button_twitter"></a>
-			<a class="a2a_button_linkedin"></a>
+			<a class="a2a_button_google_plus"></a>
 		</div>
 		<script async src="https://static.addtoany.com/menu/page.js"></script>
 		<!-- AddToAny END -->
 	</div>
 </div>
 
-<div class="row" style="padding-top:10px; padding-bottom:10px;">
+<div class="row" style="padding-top:20px; padding-bottom:20px;">
 	<div class="container">
 		<main class="o-content">
 			<div class="">
@@ -808,7 +851,7 @@
 				var shopItem = document.createElement('div');
 
 				var html = '<div class="c-shop-item__details">' +
-					'<h2 class="c-shop-item__title"><b>' + data.title + '</b></h2>' +
+					'<h3 class="c-shop-item__title">' + data.title + '</h3>' +
 					'<p class="c-shop-item__description">' + data.description + '</p>' +
 					'<ul class="c-rating"></ul>' +
 					'</div>';
@@ -1062,7 +1105,7 @@ function printCoursePart( $connection, $course_id, $issectionparts, $partid , $u
 	}
 	while($row = $result_select_present->fetch_array())
 	{
-
+			
 		if ($bool_issectionparts){
 			if($partid==1){
 				echo "<div class=\"tab-pane fade in active\" id=\"_page_".$partid."\">";
@@ -1102,6 +1145,7 @@ function printCoursePart( $connection, $course_id, $issectionparts, $partid , $u
 		if ($bool_issectionparts){
 			echo "</div>";
 		}
+		
 	}
 }
 
@@ -1227,3 +1271,5 @@ function makeUserALoggedInUser($connection, $email){
 
 
 ?>
+
+
