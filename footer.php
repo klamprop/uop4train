@@ -6,41 +6,7 @@
 	</div>	<!-- this is the container div from header-->
 		<footer id="footer">
 
-			<div class="md-modal md-effect-4 col-md-12 col-sm-12" id="modal-4">
-				<div class="row" style="margin-left: 0px !important;">
-					<button class="md-close btn btn-warning" style=""><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
-				</div>
-				<div class="md-content row" style="padding-bottom: 10px;">
-						<!-- <a href="#" id="close_btn"><div class="md-close message-send"></div></a>-->
-					<button class="md-close close_btn btn btn-warning"><div class="md-close message-send"></div></button>
-					<div id="modal4_div" style="margin-top:-15px; height:auto;">
-						<h3 style="color:#FFFFFF;">Contact us</h3>
-						<p>If you want to contact with us please fill the fields below :</p>
-						<p>
-							<form class="contact" name="contact">
-								<div class="col-md-12 col-sm-12">
-									<div class="col-md-6 col-sm-12">
-										<label class="label" for="name">Your Name</label><br>
-										<input type="text" name="name" id="contact_name" class="input-xlarge col-xs-10 col-sm-10 col-md-10"><br>
-										<label class="label" for="email">Your E-mail</label><br>
-										<input type="email" name="email" id="contact_email" class="input-xlarge col-xs-10 col-sm-10 col-md-10"><br>
-									</div>
-									<div class="col-md-6 col-sm-12">
-										<label class="label" for="message">Enter a Message</label><br>
-										<textarea name="message" id="message" class="input-xlarge col-sm-10 col-xs-10 col-md-10"></textarea>
-										<br /><br />
-									</div>
-
-								</div>
-								<br />
-							</form>
-							<div class="col-md-12 col-sm-12"><br />
-								<input type="submit" style="float:right;background-color:#FFFFFF;" value="Send!" id="submit">
-							</div>
-						</p>
-					</div>
-				</div>
-			</div>
+			
 			<div class="container row">
 				<div class="col-md-12">
 					<div class="container" style="float:right;"></div>
@@ -71,29 +37,7 @@
 			<script>
 				$(document).ready(function () {
 
-					$("input#submit").click(function(){
-						if($('#message').val()=="" || $('#contact_name').val()=="" || $('#contact_email').val()=="")
-						{
-							alert('You must fill all the fields!');
-							return false;
-						}
-						else
-						{
-							$.ajax({
-								type: "POST",
-								url: "functions/sendmail_process.php", //process to mail
-								data: $('form.contact').serialize(),
-								success: function(msg){
-									$(".message-send").html(msg);
-									$("#modal4_div").hide(); //hide popup
-									$(".close_btn").show();
-								},
-								error: function(){
-									alert("failure");
-								}
-							});
-						}
-					});
+					
 
 					$("a#md-trigger1").click(function(){
 						$("#modal-4").show();
@@ -162,6 +106,9 @@
 			<?php
 		require_once('lrs_lib.php');
 	?>
-
+<script src="js/Custom.js"></script>
 </body>
 </html>
+
+
+
