@@ -1,6 +1,19 @@
  <?php
 	include "header.php";
 
+  
+if(count($_GET)<0 || count($_GET)>1){
+  http_response_code(404);
+  include('404.html'); // provide your own HTML for the error page
+  die();
+}else if(count($_GET)==1){
+  if(!isset($_GET["course_category_id"]) && !isset($_GET["project_id"])){
+    http_response_code(404);
+    include('404.html'); // provide your own HTML for the error page
+    die();
+  }
+}
+
 	accessRole("VIEW_ALL_COURSES",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
 	$lrs_object_name = "All Course Module";
 
@@ -27,7 +40,6 @@
     $name=$rowcat[1];
     $active=$rowcat[2];
   }
-
 
 ?>
 

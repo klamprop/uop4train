@@ -1,5 +1,6 @@
 <?php include "header.php"; 
-
+accessRole("SITE_CONFIGURATION",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+	$lrs_object_name = "Site Configuration";
 	if(isset($_POST["database_host"]) && isset($_POST["database_username"]) && isset($_POST["database_password"]) && isset($_POST["db_name"]) && isset($_POST["InstallationSite"]) && isset($_POST["SiteNoteTeaser"]) && isset($_POST["emailAdministrator"]) && isset($_POST["OrganizationName"]) && isset($_POST["GeneralInformation"]) )
 	{
 		$file = 'functions/conf.php';

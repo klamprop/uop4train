@@ -1,4 +1,22 @@
-<?php include "header.php"; ?>
+<?php
+
+
+	include "functions/session.php";
+
+   if(!isset($_SESSION)){
+     http_response_code(403);
+     include('403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('403error.html'); // provide your own HTML for the error page
+     die();
+   }
+	include "header.php";
+
+ ?>
 
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 

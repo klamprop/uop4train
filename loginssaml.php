@@ -1,5 +1,7 @@
 <?php
-
+include 'header.php'; 
+accessRole("ACCESS_CONTROL",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+	 $lrs_object_name = "Access Control";
 
 if ($_GET['login']){
 	echo "lofin";
@@ -133,4 +135,7 @@ function makeUserALoggedInUser($connection, $email){
 
 
 ?>
+
+
+
 

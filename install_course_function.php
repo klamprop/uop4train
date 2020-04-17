@@ -1,5 +1,11 @@
 <?php
-	include "/functions/conf.php";
+	include "functions/conf.php";
+include "functions/session.php";
+include "functions/functions.php";
+
+include "functions/access_role.php";
+	accessRole("ACCESS_CONTROL",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+	$lrs_object_name = "Access Control";
 	session_start();
 	//include 'functions/urlupload.class.php';
 	

@@ -3,7 +3,17 @@
 	include "session.php";
 		
 		
-		
+  if(!isset($_SESSION)){
+     http_response_code(404);
+     include('../404.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(404);
+     include('../404.html'); // provide your own HTML for the error page
+     die();
+   }
 		
 		if(isset($_POST['oldpass']) | isset($_POST['newpass']) | empty($_POST['newpass2']))
 		{	

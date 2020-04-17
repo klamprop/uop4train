@@ -1,8 +1,11 @@
 <?php
+include "header.php";
 
-include "functions/session.php";
-include "functions/functions.php";
-include "functions/conf.php";
+accessRole("USER_MANAGEMENT",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+$lrs_object_name = "Users Management";
+
+
+
 
 
 		if (isset($_GET['id']) ) {

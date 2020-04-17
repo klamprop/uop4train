@@ -3,6 +3,33 @@
 	require_once 'functions/lti/blti.php';
 
 
+if(count($_GET)<1 || count($_GET)>2){
+  http_response_code(404);
+  include('404.html'); // provide your own HTML for the error page
+  die();
+}else if(count($_GET)==1){
+  
+  if(!isset($_GET["course_id"])){
+    http_response_code(404);
+    include('404.html'); // provide your own HTML for the error page
+    die();
+  }
+}else if(count($_GET)==2){
+  if(!isset($_GET["course_id"]) && !isset($_GET["preview"])){
+    http_response_code(404);
+    include('404.html'); // provide your own HTML for the error page
+    die();
+  }else if ($_GET["preview"]!="full" && $_GET["preview"]!="section"){
+    http_response_code(404);
+    include('404.html'); // provide your own HTML for the error page
+    die();
+  }
+}
+if(!is_numeric($_GET["course_id"])){
+  http_response_code(404);
+    include('404.html'); // provide your own HTML for the error page
+    die();
+}
 
 
 

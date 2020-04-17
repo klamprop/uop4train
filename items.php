@@ -1,4 +1,6 @@
-<?php include "header.php"; ?>
+<?php include "header.php";
+accessRole("ACCESS_CONTROL",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+$lrs_object_name = "Access Control"; ?>
 <div class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
 	<div class="col-sm-12">	 
 	<h1>

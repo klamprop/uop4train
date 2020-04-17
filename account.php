@@ -1,5 +1,6 @@
 <?php
 	include 'header.php'; 
+	accessRole("MY_ACCOUNT",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
 	$lrs_object_name = "My Account";
 ?>
 

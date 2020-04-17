@@ -19,7 +19,7 @@
 													<input type="email" class="form-control" id="InputEmail1" placeholder="email when sign up" name="username">
 												</div>
 												<div class="form-group">
-													<input type="password" class="form-control" id="InputPassword1" placeholder="Your FORGEBox password" name="password">
+													<input type="password" class="form-control" id="InputPassword1" autocomplete="off" placeholder="Your FORGEBox password" name="password">
 												</div>
 												<button type="submit" class="btn btn-default">Sign In</button>
 												<br><a href="forgot_my_pass.php" style="font-size: 12px; color:#555555; text-decoration: none;">Forgot my password :(</a>

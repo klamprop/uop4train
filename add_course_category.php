@@ -1,6 +1,11 @@
 <?php 
 
 	include "header.php"; 
+	accessRole("NEW_EDIT_DELETE_CATEGORY_COURSE",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+  	$lrs_object_name = "New/Edit/Delete Category Course";
+
+
+
 	
 	if(isset($_GET["id"]))
 	{

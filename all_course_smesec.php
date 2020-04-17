@@ -1,6 +1,24 @@
  <?php
 	include "header.php";
 
+
+
+	if(count($_GET)<0 || count($_GET)>1){
+  		http_response_code(404);
+  		include('404.html'); // provide your own HTML for the error page
+  		die();
+	}else if(count($_GET)==1){
+  		if(!isset($_GET["course_category_id"])){
+    			http_response_code(404);
+    			include('404.html'); // provide your own HTML for the error page
+    			die();
+  }
+}
+
+
+
+
+
 	accessRole("VIEW_ALL_COURSES",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
 	$lrs_object_name = "All Course Module";
 
@@ -350,15 +368,16 @@ function printCoursesTeaser($connection, $query_select_courses){
     </script>
    <?php
  }
- /*
+  /*
  if(!empty($_SESSION['lrs_name']) && !empty($_SESSION['lrs_endpoint_url']) && !empty($_SESSION['lrs_username']) && !empty($_SESSION['lrs_password']) && isset($_SESSION['lrs_login_record']))
  {
    $url_redirection = $_SERVER['HTTP_REFERER']."?endpoint=".$_SESSION['lrs_endpoint_url']."&auth=Basic ".base64_encode($_SESSION['lrs_username'] . ':' . $_SESSION['lrs_password']);
 
-   print "<script>	alert('sdfsd'); window.location= '".$url_redirection."'; </script>";
+   print "<script>      alert('sdfsd'); window.location= '".$url_redirection."'; </script>";
 
  }
  */
 
 
  ?>
+

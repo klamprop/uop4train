@@ -1,5 +1,6 @@
 <?php include "header.php"; 
-	
+accessRole("NEW_EDIT_DELETE_WIDGET_CATEGORY",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
+	$lrs_object_name = "New/Edit/Delete Widget Category";	
 	$upload_widget_image ="";
 	if(isset($_FILES['filename']['tmp_name']))
 	{
