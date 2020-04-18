@@ -2,6 +2,17 @@
 	include "session.php";
 	include "conf.php";
 	include "access_role.php";
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
 	
 		$data_table_category='';
 	

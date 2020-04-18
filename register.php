@@ -32,7 +32,7 @@
 					<input type="text" value="" class="form-control" placeholder="input surname" name="lname" id="lname" />
 				</div><br />
 				<div class="input-control text">
-					<input type="text" value="" class="form-control" placeholder="Input company" name="company" id="company" />
+					<input type="text" value="" class="form-control" placeholder="Input company" name="ucompany" id="ucompany" />
 				</div><br />
 				<div class="input-control text">
 					<input type="text" value="" class="form-control" placeholder="input email" name="uemail" id="uemail" />
@@ -144,5 +144,6 @@
 			
 			
 <?php include "footer.php"; ?>
+
 
 

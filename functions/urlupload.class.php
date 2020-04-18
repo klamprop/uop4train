@@ -1,4 +1,25 @@
  <?php
+	include "conf.php";
+	include "session.php";
+		
+		
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+
+
+
+
+
+
     /*This class is an open source software released under  the gnu public licence*
     *You can modify it and distribute it provided that you dont remove the following credits*
     *Author jayzantel@gmail.com url: http://www.webmastic.tk*/

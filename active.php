@@ -5,6 +5,18 @@ include "functions/conf.php";
 ?>
 
 			<?php
+			if(!isset($_GET['id'])){
+				http_response_code(403);
+				include('403error.html'); // provide your own HTML for the error page
+				die();
+			}
+
+			if(!is_numeric($_GET['id'])){
+				http_response_code(403);
+				include('403error.html'); // provide your own HTML for the error page
+				die();
+			}
+
 		if (isset($_GET['id']) ) {			
 			$user_id = $_GET['id'];
 			

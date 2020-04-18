@@ -1,6 +1,19 @@
   <?php
 	include "conf.php";
-	
+	include "session.php";
+		
+		
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }	
 	if(isset($_GET['select_interactive_part']))
 	{
 		if($_GET['select_interactive_part']==1)

@@ -2,7 +2,17 @@
 	include "session.php";
 	include "conf.php";
 	include "access_role.php";
-	
+ if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }	
 	$table_data = "<table class=\"table\"><thead><tr><th style=\"width:35%;\"><b>Widget Name</b></th><th style=\"width:10%;\"><b>Edit</b></th><th style=\"width:15%;\"><b>Publish to Stores</b></th><th style=\"width:10%;\"><b>Delete</b></th><th style=\"width:20%;\"><b>Category</b></th><th style=\"width:10%;\"><b>Active</b></th></tr></thead><tbody>";
 	
 	$query_select_categories = "SELECT id_category_widget, name_category_widget FROM tbl_category_widget WHERE active_category_widget=1";

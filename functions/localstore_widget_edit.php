@@ -1,5 +1,20 @@
 <?php
 	include "conf.php";	
+
+	include "session.php";
+		
+		
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
 	
 	if(empty($_POST['title']) || empty($_POST['author']) || empty($_POST['url']) || empty($_POST['sdescription']) || empty($_POST['description']) || empty($_POST["cat"]) )
 	{	

@@ -1,6 +1,19 @@
 <?php 
 include "conf.php";
-
+include "session.php";
+		
+		
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
 
 if ($_POST['user_id'] != null){
     $query_match_course_user2 ="SELECT user_id, course_id, last_visited, total, courses_completed FROM tbl_match_course_user WHERE course_id=".$_POST['course_id']." AND user_id=".$_POST['user_id']."";

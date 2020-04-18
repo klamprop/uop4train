@@ -1,7 +1,20 @@
 <?php
 
 	include "conf.php";
-	
+include "session.php";
+		
+		
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }	
 	if(isset($_GET["lrs_id"]) && isset($_GET["cid"]) && !isset($_GET["action"])){
 		
 		$query_select_lrs= "SELECT lrs_id FROM match_course_lrs WHERE course_id=".$_GET["cid"]." AND lrs_id=".$_GET["lrs_id"];

@@ -1,6 +1,20 @@
 <?php
 
 	include "conf.php";
+		include "session.php";
+		
+		
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
 	
 	$query_your_widget="SELECT tbl_install_widget.title_widget, tbl_install_widget.author_widget, tbl_install_widget.description_widget, tbl_install_widget.widget_id, tbl_install_widget.marketplace_id, tbl_repository.name FROM tbl_install_widget INNER JOIN tbl_repository ON tbl_install_widget.marketplace_id = tbl_repository.id WHERE user_id=".$_POST['userid'];//." AND marketplace_id= ".$_POST['marketid'];
 	

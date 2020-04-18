@@ -1,8 +1,32 @@
 <?php
 	include "conf.php";
 	include "../functions/session.php";
+		
+		
+  if(!isset($_SESSION)){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+   
+   if(!is_numeric($_SESSION['USERID'])){
+     http_response_code(403);
+     include('../403error.html'); // provide your own HTML for the error page
+     die();
+   }
+
+
+
+
+
 	use PHPImageWorkshop\ImageWorkshop;
 
+
+  if(!isset($_SESSION) && !is_numeric($_SESSION["USERID"])){
+    http_response_code(404);
+    include('404.html'); // provide your own HTML for the error page
+    die();
+  }
 
 	require_once('../functions/Core/ImageWorkshopLayer.php');
 	require_once('../functions/Exception/ImageWorkshopException.php');
