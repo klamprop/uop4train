@@ -1,6 +1,31 @@
 <?php
 	include "conf.php";
-	
+
+ 
+
+
+ if ($_POST["g-recaptcha-response"]) {
+ 
+ $params = [
+		'secret' 	=> '',
+		'response' 	=> $_POST['g-recaptcha-response']
+	];
+	$opts = [
+		'http' => [
+			'method' 	=> 'POST',
+			'header' 	=> 'Content-type: application/x-www-form-urlencoded',
+			'content' 	=> http_build_query($params)
+		]
+	];
+	$context 	= stream_context_create($opts);
+	$res 		= file_get_contents('https://www.google.com/recaptcha/api/siteverify',false,$context);
+	$res 		= json_decode($res,true);
+
+  if($res['success']) :
+		// Code block if verified
+
+
+  
 	// we check if everything is filled in
 	if(empty($_POST['fname']) || empty($_POST['lname']) || empty($_POST['uemail']) || empty($_POST['pass']))
 	{
@@ -68,6 +93,12 @@
 	{
 		die(msg(0,"The email is in use!"));
 	}
+ 	else :
+		// code block if not
+   die(msg(0,"Invalid reCaptcha!"));
+	endif;
+ 
+}
 	
 
 	function Send_registration_mail($InstallationSite,$url_path)

@@ -29,6 +29,7 @@ if(isset($_GET["actnum"]) && isset($_GET["mail"])){
 			</div>
 			</br>
 			<p id="notificatio_msg"></p>
+      
 			<br />
 			<input type="submit" id="resetpasssubmit" onclick="return false;" value="Change">
 							
@@ -46,7 +47,8 @@ else{
 	
 ?>
 
-<form method="post" action="" name="change_password">
+
+<form method="post" action="" name="change_password" id="change_password">
 	<div class="row" style="padding:30px;">
 		<h3>Give your login email!</h3>
 		<label for="email">E-mail</label>
@@ -55,12 +57,29 @@ else{
 	</div>															
 	<div class="row" style="padding:30px;">			
 		<p id="notification_msg"></p>
+        <div class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha" data-sitekey="6LcCzuoUAAAAAK3rduG0fXk9drsJF_mzk6MtYA6V"></div>
 		<input type="submit" id="btnsubmit" onclick="return false;" value="Submit">
 	</div>	
 </form>	
 <?php
 }
 ?>
+
+<script type="text/javascript">
+      
+      var onloadCallback = function() {
+        grecaptcha.render('g-recaptcha', {
+          'sitekey' : ''
+        });
+      };
+      
+      
+    </script>
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
+    
 <script>
 
 	$('#btnsubmit').click(function(){
@@ -75,12 +94,13 @@ else{
 			$.ajax({
 				type: "POST",
 				url: "functions/forgot_pass.php",
-				data: "email="+formData,
+				//data: "email="+formData,
+        data:$('#change_password').serialize(),
 				dataType: "json",
 				success: function(msg){
 					$("#notification_msg").html("");
 					$("#notification_msg").append("<span style=\"color:green;\">"+msg.txt+"</span>");
-				
+				  	grecaptcha.reset();
 				}						
 			});
 		
@@ -185,7 +205,7 @@ else{
 						$("#notificatio_msg").append("<span style=\"color:red;\">"+msg.txt+"</span>");
 						
 					
-							
+						
 				}							
 			});
 					

@@ -54,6 +54,8 @@
 					</select>
 				</div>								
 				<br />				
+        <div class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha" data-sitekey="6LcCzuoUAAAAAK3rduG0fXk9drsJF_mzk6MtYA6V"></div>
+      <br/>
 				<input type="hidden" name="user_active" id="user_active" value="<?php echo mt_rand();?>" />
 				<!-- <input type="submit" id="submit" value="Submit"></input> -->
 				<a href="#" class="btn btn-default" type="submit" onclick="register(); return false;">Submit</a>&nbsp; &nbsp; or &nbsp; <a href="index.php">Sign in to ForgeBox</a>	<br />
@@ -65,8 +67,20 @@
 			<div id="error" style="margin-top:-10px;">
 				&nbsp;
 			</div>
+    <script type="text/javascript">
+      
+      var onloadCallback = function() {
+        grecaptcha.render('g-recaptcha', {
+          'sitekey' : ''
+        });
+      };
+      
+      
+    </script>
 
-
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
 	</div>
 </div><!--  ------------------------  END CONTENT      ------------------------      -->
 
@@ -105,6 +119,7 @@
 
 				function register()
 				{
+        
 					hideshow('loading',1);
 					error(0);	
 					$.ajax({
@@ -124,6 +139,7 @@
 							}
 							
 							hideshow('loading',0);
+      grecaptcha.reset();
 						}
 					});
 				}

@@ -2,6 +2,26 @@
 
 	
 	include "conf.php";
+ 
+
+ if ($_POST["g-recaptcha-response"]) {
+ 
+ $params = [
+		'secret' 	=> '',
+		'response' 	=> $_POST['g-recaptcha-response']
+	];
+	$opts = [
+		'http' => [
+			'method' 	=> 'POST',
+			'header' 	=> 'Content-type: application/x-www-form-urlencoded',
+			'content' 	=> http_build_query($params)
+		]
+	];
+	$context 	= stream_context_create($opts);
+	$res 		= file_get_contents('https://www.google.com/recaptcha/api/siteverify',false,$context);
+	$res 		= json_decode($res,true);
+
+  if($res['success']) {
 	
 	if(isset($_POST['email']))
 	{
@@ -55,7 +75,12 @@
 		}
 
 	}
-	
+	}else {
+		// code block if not
+   die(msg(1,"Invalid reCaptcha!"));
+	}
+ 
+}
 	
 	
 	function msg($status,$txt)

@@ -14,7 +14,7 @@
 											<li>
 											<h1 style="color:#555555; margin-top:0px">Sign In</h1>
 											<div class="status alert alert-success" style="display: none"></div>
-											<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+											<form action="<?php echo  htmlspecialchars($_SERVER["PHP_SELF"], ENT_QUOTES, "utf-8");?>" method="post">
 												<div class="form-group">
 													<input type="email" class="form-control" id="InputEmail1" placeholder="email when sign up" name="username">
 												</div>
@@ -146,3 +146,4 @@ function onSignInCallback(authResult) {
 
 
  </script>
+
