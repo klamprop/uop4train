@@ -57,7 +57,7 @@ else{
 	</div>															
 	<div class="row" style="padding:30px;">			
 		<p id="notification_msg"></p>
-        <div class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha" data-sitekey="6LcCzuoUAAAAAK3rduG0fXk9drsJF_mzk6MtYA6V"></div>
+        <div class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha" data-sitekey=""></div>
 		<input type="submit" id="btnsubmit" onclick="return false;" value="Submit">
 	</div>	
 </form>	

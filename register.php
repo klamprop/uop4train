@@ -54,7 +54,7 @@
 					</select>
 				</div>								
 				<br />				
-        <div class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha" data-sitekey="6LcCzuoUAAAAAK3rduG0fXk9drsJF_mzk6MtYA6V"></div>
+        <div class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha" data-sitekey=""></div>
       <br/>
 				<input type="hidden" name="user_active" id="user_active" value="<?php echo mt_rand();?>" />
 				<!-- <input type="submit" id="submit" value="Submit"></input> -->
