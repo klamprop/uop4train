@@ -1,102 +1,34 @@
 <?php
+	if(count($_GET)<1 || count($_GET)>2){
+		http_response_code(404);
+		include('404.html'); // provide your own HTML for the error page
+		die();
+	}else if(count($_GET)==1){
+		
+		if(!isset($_GET["course_id"])){
+			http_response_code(404);
+			include('404.html'); // provide your own HTML for the error page
+			die();
+		}
+	}else if(count($_GET)==2){
+		if(!isset($_GET["course_id"]) && !isset($_GET["preview"])){
+			http_response_code(404);
+			include('404.html'); // provide your own HTML for the error page
+			die();
+		}else if ($_GET["preview"]!="full" && $_GET["preview"]!="section"){
+			http_response_code(404);
+			include('404.html'); // provide your own HTML for the error page
+			die();
+		}
+	}
+	if(!is_numeric($_GET["course_id"])){
+		http_response_code(404);
+			include('404.html'); // provide your own HTML for the error page
+			die();
+	}
 	include "header.php";
 	require_once 'functions/lti/blti.php';
 
-
-if(count($_GET)<1 || count($_GET)>2){
-  http_response_code(404);
-  include('404.html'); // provide your own HTML for the error page
-  die();
-}else if(count($_GET)==1){
-  
-  if(!isset($_GET["course_id"])){
-    http_response_code(404);
-    include('404.html'); // provide your own HTML for the error page
-    die();
-  }
-}else if(count($_GET)==2){
-  if(!isset($_GET["course_id"]) && !isset($_GET["preview"])){
-    http_response_code(404);
-    include('404.html'); // provide your own HTML for the error page
-    die();
-  }else if ($_GET["preview"]!="full" && $_GET["preview"]!="section"){
-    http_response_code(404);
-    include('404.html'); // provide your own HTML for the error page
-    die();
-  }
-}
-if(!is_numeric($_GET["course_id"])){
-  http_response_code(404);
-    include('404.html'); // provide your own HTML for the error page
-    die();
-}
-
-
-
-	if(!empty($_POST)){
-		$query_select_user = "SELECT count(id_user) FROM tbl_users WHERE email_user='".$_POST['lis_person_contact_email_primary']."'";
-		$result_select_user = $connection->query($query_select_user);
-
-		while($row = $result_select_user->fetch_array())
-		{
-			$is_active_user = $row[0];
-		}
-
-		if($is_active_user==0){
-			//Insert user
-			$query_install_users = "INSERT INTO tbl_users(name_user, surname_user, email_user, password_user, active_user, register_date, last_login_date, avatar_name, auth_type) VALUES ('".$_POST["lis_person_name_given"]."','".$_POST["lis_person_name_family"]."','".$_POST["lis_person_contact_email_primary"]."','".MD5(RAND())."',1,now(),now(),'','".$_POST["tool_consumer_instance_name"]."')";
-
-			$result_install_user = $connection->query($query_install_users);
-
-
-			$query_select_user_id = "SELECT id_user FROM tbl_users WHERE email_user='".$_POST['lis_person_contact_email_primary']."'";
-			$result_select_user_id = $connection->query($query_select_user_id);
-
-			while($row1 = $result_select_user_id->fetch_array())
-			{
-				$_user_id = $row1[0];
-			}
-
-			print strpos($_POST['lis_person_contact_email_primary'],'Instructor');
-			if(strpos($_POST['roles'],'Instructor') !== false){
-				$role_id=5;
-			}
-			else
-			{
-				$role_id=6;
-			}
-			$query_user_role="INSERT INTO tbl_user_role(id_user, id_role) VALUES (".$_user_id.",".$role_id.")";
-			$results_user_role = $connection->query($query_user_role);
-
-		}
-		else
-		{
-			//Update user last login
-			$query_update_user_last_login = "UPDATE tbl_users SET last_login_date=now() WHERE active_user=1 AND id_user=".$_user_id;
-			$result_update_user_last_login = $connection->query($query_update_user_last_login);
-
-		}
-
-
-		makeUserALoggedInUser($connection, $_POST["lis_person_contact_email_primary"]);
-
-	}
-
-
-	$query_select_lrs_teacher= "SELECT lrs_details.endpoint_url, lrs_details.username, lrs_details.password FROM lrs_details INNER JOIN match_course_lrs ON lrs_details.id = match_course_lrs.lrs_id  WHERE match_course_lrs.course_id = ".$_GET['course_id'];
-
-	$result_select_lrs_teacher = $connection->query($query_select_lrs_teacher);
-	
-	
-	
-	while($row = $result_select_lrs_teacher->fetch_array()){
-		$lrs_endpoint_teacher = $row[0];
-		$lrs_authUser_teacher = $row[1];
-		$lrs_authPassword_teacher = $row[2];
-	}
-	if (strpos($lrs_endpoint_teacher,'http') == false) {
-		$lrs_endpoint_teacher = "http://".$lrs_endpoint_teacher;
-	}
 
 	if(isset($_GET['course_id']))
 	{
@@ -181,203 +113,11 @@ if(!is_numeric($_GET["course_id"])){
 		}
 	}
 
-
-	if(isset($lrs_endpoint_teacher) && !empty($lrs_endpoint_teacher)){
-		if($lrs_endpoint_teacher != "http://"){
-			$url_iframe = "xendpoint=".urlencode($lrs_endpoint_teacher)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser_teacher.":".$lrs_authPassword_teacher))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']);
-		}
-		else
-		{
-			$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']);
-		}
-	}
-	else
-	{
-		$url_iframe = "xendpoint=".urlencode($lrs_endpoint)."&xapiauth=".urlencode("Basic ".base64_encode($lrs_authUser.":".$lrs_authPassword))."&actorname=".urlencode($_SESSION['FNAME'].' '.$_SESSION['LNAME'])."&actoremail=".urlencode($_SESSION['EMAIL']);
-	}
-
 	?>
 
 
-	<script>
+	
 
-	var xapiendpoint2 = "<?php print $lrs_endpoint_teacher; ?>";
-	var xapiauthtxt2 = "<?php print "Basic ".base64_encode($lrs_authUser_teacher.":".$lrs_authPassword_teacher); ?>";
-
-	var tincan1 = new TinCan (
-    {
-		url: window.location.href,
-		recordStores: [
-			{
-				endpoint:xapiendpoint2,
-				auth:xapiauthtxt2
-			}
-		]
-	}
-	);
-
-
-        tincan1.sendStatement(
-            {
-				actor: {
-					name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
-					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
-				  },
-				  verb: {
-					id: "http://adlnet.gov/expapi/verbs/experienced",
-					display: {"en-US": "experienced"}
-				},
-				object: {
-					id: "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>",
-					definition: {
-						type: "http://adlnet.gov/expapi/activities/assessment",
-						name: { "en-US": "<?php print $lrs_object_name; ?>" },
-						extensions: {
-							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
-						}
-					}
-				}
-            },
-            function () {}
-        );
-
-
-	/*
-	var user_name;
-	var user_email;
-	var self_file;
-	var object_id;
-
-	user_name = "<?php echo $_SESSION['FNAME']." ".$_SESSION['LNAME']; ?>";
-	user_email = "<?php echo $_SESSION['EMAIL']; ?>";
-	self_file = "<?php print $_SERVER['PHP_SELF']; ?>";
-	object_id = "<?php print "http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
-	*/
-
-	var activitie_str='';
-	var verb_str='';
-	var verb_url_str='';
-
-	function myTinCanApi_Function(activitie_str,verb_str,verb_url_str) {
-		/*
-		var tincan = new TinCan (
-            {
-                url: window.location.href,
-                activity: {
-                    id: "<?php print $_SERVER['PHP_SELF']; ?>",
-                    definition: {
-                        name: {
-                            "en-US": "FORGEBox - <?php print $_SERVER['PHP_SELF']; ?>"
-                        },
-                        description: {
-                            "en-US": "FORGEBox - <?php print $_SERVER['PHP_SELF']; ?>"
-                        },
-                        type: "http://activitystrea.ms/schema/1.0/page"
-                    }
-                }
-            }
-        ); */
-
-        tincan.sendStatement(
-            {
-				actor: {
-					name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
-					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
-				  },
-				  verb: {
-					id: verb_url_str,
-					display: {"en-US": verb_str}
-				},
-				object: {
-					id: "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>",
-					definition: {
-						type: "http://adlnet.gov/expapi/activities/assessment",
-						name: { "en-US":  activitie_str },
-						extensions: {
-							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
-						}
-					}
-				}
-            },
-            function () {}
-        );
-
-		tincan1.sendStatement(
-            {
-				actor: {
-					name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
-					mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
-				  },
-				  verb: {
-					id: verb_url_str,
-					display: {"en-US": verb_str}
-				},
-				object: {
-					id: "<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>",
-					definition: {
-						type: "http://adlnet.gov/expapi/activities/assessment",
-						name: { "en-US":  activitie_str },
-						extensions: {
-							"<?php print 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>": "<?php print $_SERVER['PHP_SELF']; ?>"
-						}
-					}
-				}
-            },
-            function () {}
-        );
-	}
-
-
-
-
-
-		/*function Config() {
-			"use strict";
-		}
-		Config.endpoint = "http://www.forgebox.eu/lrs/learninglocker/public/data/xAPI/";
-		Config.authUser = "e9f5d5275d62a45515d57bdd562f3c45e46f96c8";
-		Config.authPassword = "8d1c16c00f45a3e93f03656acbcc8cd5a16b8f42";
-		Config.actor = { "mbox":["tranoris@ece.upatras.gr"], "name":["Christos"] };
-
-		$(document).ready(function(){
-
-            var PROTOTYPE_SHOW_CONFIG_INFO = true;
-            var PROTOTYPE_DEFAULT_NAME = Config.actor.name[0];
-            var PROTOTYPE_DEFAULT_MBOX = Config.actor.mbox[0];
-            var PROTOTYPE_ENDPOINT = 'http://www.forgebox.eu/lrs/learninglocker/public/data/xAPI/';
-            var PROTOTYPE_AUTH = 'Basic ' + Base64.encode('e9f5d5275d62a45515d57bdd562f3c45e46f96c8:8d1c16c00f45a3e93f03656acbcc8cd5a16b8f42');
-		});*/
-
-	</script>
-	<script type="text/javascript">
-		//alert(window.location.href);
-     /*   var tincan = new TinCan (
-            {
-                url: window.location.href,
-                activity: {
-                    id: GolfExample.CourseActivity.id + "/Etiquette/Course.html",
-                    definition: {
-                        name: {
-                            "en-US": "Etiquette - Course"
-                        },
-                        description: {
-                            "en-US": "An overview of golf etiquette as it pertains to the course."
-                        }
-                    }
-                }
-            }
-        );
-
-        tincan.sendStatement(
-            {
-                verb: "experienced",
-                context: GolfExample.getContext(
-                    GolfExample.CourseActivity.id
-                )
-            },
-            function () {}
-        );*/
-	</script>
 
 
 <div id="CourseContentRow" class="row"> <!--  ------------------------  START CONTENT      ------------------------      -->
@@ -1298,5 +1038,6 @@ function makeUserALoggedInUser($connection, $email){
 
 
 ?>
+
 
 

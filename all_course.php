@@ -15,22 +15,9 @@ if(count($_GET)<0 || count($_GET)>1){
 }
 
 	accessRole("VIEW_ALL_COURSES",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
-	$lrs_object_name = "All Course Module";
+	
 
-	//uid tou teacher
-	/*$query_select_lrs= "SELECT lrs_name, endpoint_url, username, password FROM lrs_details WHERE uid=12";
 
-	$result_select_lrs = $connection->query($query_select_lrs);
-
-	while($row_lrs = $result_select_lrs->fetch_array()){
-		$_lrs_name=$row_lrs[0];
-		$_lrs_endpoint_url='http://'.$row_lrs[1];
-		$_lrs_username=$row_lrs[2];
-		$_lrs_password=$row_lrs[3];
-		$_lrs_login_record=1;
-	}
-
-	$url_lrs_endpoint = '&endpoint='.rawurlencode($_lrs_endpoint_url).'&auth=Basic%20'.urlencode(base64_encode($_lrs_username.":".$_lrs_password)).'&actor='.str_replace('%27','&quot;',rawurlencode("{'mbox' : 'kostas.bakoulias@gmail.com', 'name' : 'Costas Bakoulias'}"));	*/
 
   $query_select= "SELECT id, name, active FROM tbl_course_types";// WHERE id =".$_GET['citem'];
   $result_select = $connection->query($query_select);
@@ -315,76 +302,7 @@ function printCoursesTeaser($connection, $query_select_courses){
 
  ?>
 
- <?php
+ 
+    
+  
 
- if(isset($_SESSION['USERID']) && $_SESSION['USERID']>0 && $_SESSION['USERID']!=7)
- {
-   ?>
-    <script type="text/javascript">
-     /*var tincan = new TinCan (
-            {
-                url: window.location.href,
-                activity: {
-                    id: "/index.php",
-                    definition: {
-                        name: {
-                            "en-US": "FORGEBox - index.php"
-                        },
-                        description: {
-                            "en-US": "FORGEBox - index.php"
-                        },
-                        type: "http://activitystrea.ms/schema/1.0/page"
-                    }
-                }
-            }
-        );
-*/
-        tincan.sendStatement(
-            {
-       actor: {
-         name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
-         mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
-         },
-         verb: {
-         id: "http://adlnet.gov/expapi/verbs/experienced",
-         display: {"en-US": "experienced"}
-       },
-       object: {
-         id: "http://localhost/git_Project/ForgeBox/index.php",
-         definition: {
-           type: "http://adlnet.gov/expapi/activities/assessment",
-           name: { "en-US": "Login FORGEBox" },
-           extensions: {
-             "http://localhost/git_Project/ForgeBox/index.php": "index"
-           }
-         }
-       },
-                context: {
-         extensions: {
-           "http://localhost/git_Project/ForgeBox/index.php": "index.php"
-         }
-       },
-       authority: {
-         objectType: "Agent",
-         name: "<?php echo $adminName; ?>",
-         mbox: "mailto:<?php echo $adminEmail; ?>"
-
-       }
-            },
-            function () {}
-        );
-    </script>
-   <?php
- }
- /*
- if(!empty($_SESSION['lrs_name']) && !empty($_SESSION['lrs_endpoint_url']) && !empty($_SESSION['lrs_username']) && !empty($_SESSION['lrs_password']) && isset($_SESSION['lrs_login_record']))
- {
-   $url_redirection = $_SERVER['HTTP_REFERER']."?endpoint=".$_SESSION['lrs_endpoint_url']."&auth=Basic ".base64_encode($_SESSION['lrs_username'] . ':' . $_SESSION['lrs_password']);
-
-   print "<script>	alert('sdfsd'); window.location= '".$url_redirection."'; </script>";
-
- }
- */
-
-
- ?>

@@ -307,77 +307,7 @@ function printCoursesTeaser($connection, $query_select_courses){
 
  ?>
 
- <?php
+ 
+   
 
- if(isset($_SESSION['USERID']) && $_SESSION['USERID']>0 && $_SESSION['USERID']!=7)
- {
-   ?>
-    <script type="text/javascript">
-     /*var tincan = new TinCan (
-            {
-                url: window.location.href,
-                activity: {
-                    id: "/index.php",
-                    definition: {
-                        name: {
-                            "en-US": "FORGEBox - index.php"
-                        },
-                        description: {
-                            "en-US": "FORGEBox - index.php"
-                        },
-                        type: "http://activitystrea.ms/schema/1.0/page"
-                    }
-                }
-            }
-        );
-*/
-        tincan.sendStatement(
-            {
-       actor: {
-         name: "<?php echo $_SESSION['FNAME'].' '.$_SESSION['LNAME']; ?>",
-         mbox: "mailto:<?php echo $_SESSION['EMAIL']; ?>"
-         },
-         verb: {
-         id: "http://adlnet.gov/expapi/verbs/experienced",
-         display: {"en-US": "experienced"}
-       },
-       object: {
-         id: "http://localhost/git_Project/ForgeBox/index.php",
-         definition: {
-           type: "http://adlnet.gov/expapi/activities/assessment",
-           name: { "en-US": "Login FORGEBox" },
-           extensions: {
-             "http://localhost/git_Project/ForgeBox/index.php": "index"
-           }
-         }
-       },
-                context: {
-         extensions: {
-           "http://localhost/git_Project/ForgeBox/index.php": "index.php"
-         }
-       },
-       authority: {
-         objectType: "Agent",
-         name: "<?php echo $adminName; ?>",
-         mbox: "mailto:<?php echo $adminEmail; ?>"
-
-       }
-            },
-            function () {}
-        );
-    </script>
-   <?php
- }
-  /*
- if(!empty($_SESSION['lrs_name']) && !empty($_SESSION['lrs_endpoint_url']) && !empty($_SESSION['lrs_username']) && !empty($_SESSION['lrs_password']) && isset($_SESSION['lrs_login_record']))
- {
-   $url_redirection = $_SERVER['HTTP_REFERER']."?endpoint=".$_SESSION['lrs_endpoint_url']."&auth=Basic ".base64_encode($_SESSION['lrs_username'] . ':' . $_SESSION['lrs_password']);
-
-   print "<script>      alert('sdfsd'); window.location= '".$url_redirection."'; </script>";
-
- }
- */
-
-
- ?>
 
