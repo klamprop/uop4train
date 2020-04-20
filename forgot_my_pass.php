@@ -31,6 +31,7 @@ if(isset($_GET["actnum"]) && isset($_GET["mail"])){
 			<p id="notificatio_msg"></p>
       
 			<br />
+			
 			<input type="submit" id="resetpasssubmit" onclick="return false;" value="Change">
 							
 		<?php
@@ -58,6 +59,7 @@ else{
 	<div class="row" style="padding:30px;">			
 		<p id="notification_msg"></p>
         <div class="g-recaptcha" name="g-recaptcha-response" id="g-recaptcha" data-sitekey=""></div>
+				<input type="hidden" name="anticsrf" value="<?php echo $anticsrf?>"/>
 		<input type="submit" id="btnsubmit" onclick="return false;" value="Submit">
 	</div>	
 </form>	
@@ -221,3 +223,4 @@ else{
 <?php
 	include 'footer.php';
 ?>
+
