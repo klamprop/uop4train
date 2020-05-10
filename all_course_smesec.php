@@ -131,7 +131,7 @@ function printTeaserSignUpCourses($connection){
     $query_select_courses .= " tbl_courses.educationalRole, tbl_courses.audienceType, tbl_courses.active, tbl_courses.publish_to_anonymous, tbl_courses.category_id, tbl_courses.create_uid, ";
     $query_select_courses .= " tbl_courses.interactive_category, tbl_courses.interactive_item, tbl_courses.interactive_url, tbl_courses.iframe_height, tbl_category_courses.`name` FROM ";
     $query_select_courses .= " tbl_category_courses INNER JOIN tbl_match_course_category ON tbl_match_course_category.course_category_id = tbl_category_courses.id INNER JOIN tbl_courses ON tbl_match_course_category.course_id = tbl_courses.id INNER JOIN tbl_project_course ON tbl_project_course.course_id = tbl_courses.id  WHERE ";
-    $query_select_courses .= " tbl_match_course_category.course_category_id = ".$course_category_id." AND tbl_project_course.project_id = 1 AND tbl_courses.course_item_id = 1 ORDER BY tbl_courses.create_date DESC";
+    $query_select_courses .= " tbl_match_course_category.course_category_id = ".$course_category_id." AND tbl_project_course.project_id = 1  AND tbl_courses.course_item_id = 1 AND tbl_courses.active = 1 AND tbl_courses.publish_to_anonymous = 1 ORDER BY tbl_courses.create_date DESC";
     $result_select_courses = $connection->query($query_select_courses);
   
   
