@@ -13,3 +13,9 @@ vendor/autoload.php
 composer.json
 composer.lock
 keys/
+api/smesec.php
+forgot_my_pass.php
+functions/forgot_pass.php
+functions/session.php
+functions/submit.php
+register.php
