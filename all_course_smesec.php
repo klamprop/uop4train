@@ -2,7 +2,6 @@
 	include "header.php";
 
 
-
 	if(count($_GET)<0 || count($_GET)>1){
   		http_response_code(404);
   		include('404.html'); // provide your own HTML for the error page
@@ -15,27 +14,9 @@
   }
 }
 
-
-
-
-
 	accessRole("VIEW_ALL_COURSES",$connection) or die('<META HTTP-EQUIV="Refresh" CONTENT="0;URL=403error.html">');
-	$lrs_object_name = "All Course Module";
 
-	//uid tou teacher
-	/*$query_select_lrs= "SELECT lrs_name, endpoint_url, username, password FROM lrs_details WHERE uid=12";
 
-	$result_select_lrs = $connection->query($query_select_lrs);
-
-	while($row_lrs = $result_select_lrs->fetch_array()){
-		$_lrs_name=$row_lrs[0];
-		$_lrs_endpoint_url='http://'.$row_lrs[1];
-		$_lrs_username=$row_lrs[2];
-		$_lrs_password=$row_lrs[3];
-		$_lrs_login_record=1;
-	}
-
-	$url_lrs_endpoint = '&endpoint='.rawurlencode($_lrs_endpoint_url).'&auth=Basic%20'.urlencode(base64_encode($_lrs_username.":".$_lrs_password)).'&actor='.str_replace('%27','&quot;',rawurlencode("{'mbox' : 'kostas.bakoulias@gmail.com', 'name' : 'Costas Bakoulias'}"));	*/
 
   $query_select= "SELECT id, name, active FROM tbl_course_types";// WHERE id =".$_GET['citem'];
   $result_select = $connection->query($query_select);
@@ -70,8 +51,9 @@
 	          if(isset($_GET['project_id']))
             {
               printSMESECCourses($connection,$_GET['project_id']);
+            }elseif(isset($_GET['course_category_id'])){
+              printCoursesPerCategory($connection,$_GET['course_category_id']);
             }else
-//           printTeaserPublicCourses($connection);
 printSMESECCourses($connection,2);
            ?>
 			</div>
@@ -87,7 +69,7 @@ printSMESECCourses($connection,2);
 
    var catid=0;
    var citem="<?php echo  $_GET['citem']; ?>";// if(isset($_GET['citem'])){	if(!empty($_GET['citem'])){}}
-   var link = 'functions/select_cat_courses_list.php';//?citem='+citem;
+   var link = 'functions/select_cat_courses_list_smesec.php';//?citem='+citem;
    var link2 = 'functions/select_proj_courses_list.php';
    $(document).ready(function(){
    <?php
@@ -140,6 +122,27 @@ function printTeaserSignUpCourses($connection){
   printCoursesTeaser($connection, $query_select_courses);
 
   }
+
+  function printCoursesPerCategory($connection, $course_category_id){
+    $query_select_courses = "SELECT tbl_courses.id, tbl_courses.title, tbl_courses.sdescription, tbl_courses.content, tbl_courses.course_item_id, tbl_courses.author, ";
+    $query_select_courses .= " tbl_courses.create_date, tbl_courses.modify_date, tbl_courses.publisher, tbl_courses.`language`, tbl_courses.about, tbl_courses.alignmentType, ";
+    $query_select_courses .= " tbl_courses.educationalFramework, tbl_courses.targetName, tbl_courses.targetDescription, tbl_courses.targetURL, tbl_courses.educationalUse, ";
+    $query_select_courses .= " tbl_courses.duration, tbl_courses.typicalAgeRange, tbl_courses.interactivityType, tbl_courses.learningResourseType, tbl_courses.licence, tbl_courses.isBasedOnURL, ";
+    $query_select_courses .= " tbl_courses.educationalRole, tbl_courses.audienceType, tbl_courses.active, tbl_courses.publish_to_anonymous, tbl_courses.category_id, tbl_courses.create_uid, ";
+    $query_select_courses .= " tbl_courses.interactive_category, tbl_courses.interactive_item, tbl_courses.interactive_url, tbl_courses.iframe_height, tbl_category_courses.`name` FROM ";
+    $query_select_courses .= " tbl_category_courses INNER JOIN tbl_match_course_category ON tbl_match_course_category.course_category_id = tbl_category_courses.id INNER JOIN tbl_courses ON tbl_match_course_category.course_id = tbl_courses.id INNER JOIN tbl_project_course ON tbl_project_course.course_id = tbl_courses.id  WHERE ";
+    $query_select_courses .= " tbl_match_course_category.course_category_id = ".$course_category_id." AND tbl_project_course.project_id = 1 AND tbl_courses.course_item_id = 1 ORDER BY tbl_courses.create_date DESC";
+    $result_select_courses = $connection->query($query_select_courses);
+  
+  
+    printCoursesTeaser($connection, $query_select_courses);
+  
+    }
+
+
+
+
+
 
 function printCoursesTeaser($connection, $query_select_courses){
  $result_select_course = $connection->query($query_select_courses)  or die("Error in query.." . mysqli_error($connection));
