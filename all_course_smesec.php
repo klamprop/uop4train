@@ -44,6 +44,10 @@
           <a target="_blank" rel="noopener noreferrer" href="https://www.concordia-h2020.eu/map-courses-cyber-professionals/"><img style="width:120px;" src="images/concordia.png"></a>
         </div>
 
+        <div style="font-family:'Miriam Libre'; margin-left:10px; margin-top:15px; ">
+          <a target="_blank" rel="noopener noreferrer" href="https://gcatoolkit.org/smallbusiness/#toolboxes"><img style="width:120px;  border-radius: 10%;" src="images/gca.png"></a>
+        </div>
+
       </div>
 			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px;padding-bottom:50px">
 			    <div style="text-align:center;"> <h2 style="color:#000000; font-family:'Jost*'; font-weight:300; margin-left:5px;" >LIST OF SMESEC COURSES</h2></div>
